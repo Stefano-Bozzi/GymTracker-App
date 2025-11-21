@@ -4022,12 +4022,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
   );
 
-/// gainflow 1.0.0+1
+/// gainflow 0.1.0+1
 const _gainflow = Package(
     name: 'gainflow',
     description: 'A new Flutter project.',
     authors: [],
-    version: '1.0.0+1',
+    version: '0.1.0+1',
     spdxIdentifiers: ['MIT'],
     isMarkdown: true,
     isSdk: false,
