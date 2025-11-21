@@ -1,36 +1,57 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; // Import Flutter Material library for UI widgets and themes
+
+// Define Colors for Light and Dark mode
+final lightScheme = ColorScheme(
+  brightness: Brightness.light,
+  primary: Color(0xFF607D8B),   // Define primary color
+  onPrimary: Colors.white,      // Define color for text/icons on primary color
+  secondary: Color(0xFF546E7A),
+  onSecondary: Colors.white,
+  error: Color(0xFFB00020),
+  onError: Colors.white,
+  surface: Colors.white,        // Define surface color (e.g., card backgrounds)
+  onSurface: Color(0xFF1C1B1F), // Define color for text/icons on surface color
+);
+
+final darkScheme = ColorScheme(
+  brightness: Brightness.dark,
+  primary: Color(0xFF607D8B),
+  onPrimary: Colors.black,
+  secondary: Color(0xFF546E7A),
+  onSecondary: Colors.black,
+  error: Color(0xFFCF6679),
+  onError: Colors.black,
+  surface: Color(0xFF121212),
+  onSurface: Colors.white,
+);
+
+//----------------------------------------------------------------
+// RUN THE APP
+//----------------------------------------------------------------
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MyApp()); // Launch the application
 }
 
+//----------------------------------------------------------------
+// APP BODY
+//----------------------------------------------------------------
+// MyApp is a StatelessWidget that doesn't hold any mutable state
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key}); // Constructor to initialize MyApp
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { // here things when changed can be hot reloaded
+    // Build method returns the widget's user interface
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: true,              // Show a Debug banner on top-right corner during development
+      title: 'GainFlow',
+      theme: ThemeData(colorScheme: lightScheme),
+      darkTheme: ThemeData(colorScheme: darkScheme),
+      themeMode: ThemeMode.system,                    // Change theme along with system
+      home: const MyHomePage(                         // Scaffold=MyHomePage
+        title: 'GainFlow',
+        ),
     );
   }
 }
