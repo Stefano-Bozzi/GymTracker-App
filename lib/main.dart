@@ -87,6 +87,60 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero, //overlap the animation on status bar, but infor are still visible (time, notifications, etc.)
+          children: <Widget>[
+            // Drawer Title
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              child: Text(
+                'Options',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            
+            // I want the Drawer to have:
+            // Statistics for graphs, 
+            // Settings for future fixed theme or reset,
+            // Liceses for legal security 
+
+            // Statistics
+            ListTile(
+              leading: const Icon(Icons.bar_chart_rounded),
+              title: const Text('Statistics'),
+              onTap: () {
+                // here the logic 
+              },
+            ),
+            
+            // Settings
+            ListTile(
+              leading: const Icon(Icons.settings_rounded),
+              title: const Text('Settings'),
+              onTap: () {
+                // here the logic
+                // Navigator.pop(context); 
+              },
+            ),
+            
+            // Licenses
+            ListTile(
+              leading: const Icon(Icons.attribution_rounded),
+              title: const Text('Licenses'),
+              onTap: () {
+                // here the logic
+                // Navigator.pop(context); 
+              },
+            ),
+          ],
+        ),
+      ),
       bottomNavigationBar: NavigationBar( //set a list of pages at the bottom. when pressed all the screen change throg the selected page.
         destinations: [
           NavigationDestination(icon: Icon(Icons.calendar_today), label: 'Calendar'),
@@ -123,7 +177,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.add_rounded),
       ),
     );
   }
