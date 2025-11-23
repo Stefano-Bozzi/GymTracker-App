@@ -76,7 +76,7 @@ final lightScheme = ColorScheme(
 final darkScheme = ColorScheme(
   brightness: Brightness.dark,
   primary: Color(0xFF607D8B),
-  onPrimary: Colors.black,
+  onPrimary: Color(0xFF121212),
   secondary: Color(0xFF546E7A),
   onSecondary: Colors.black,
   error: Color(0xFFCF6679),
