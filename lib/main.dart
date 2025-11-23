@@ -6,11 +6,15 @@ import 'package:flutter/material.dart';                   // Import Flutter Mate
 import 'package:flutter/services.dart' show rootBundle;   // Import class to interact with system services
                                                           // rootBundel is needet to have access to "-access" files
 import 'package:markdown_widget/markdown_widget.dart';    // needed for Third Party Licenses display
+import 'package:robur_fit_x/views/widget_tree.dart';
+import 'views/widgets/navbar_widget.dart';
+
+const String appName = "RoburFitX";
 
 class LicensesPage extends StatelessWidget {              // define a class without a state
   const LicensesPage({super.key});                        // constructor
   final String myLicenseText = '''
-# 📜 License RoburFitX
+# 📜 License $appName
 
 **Copyright (c) 2025, Stefano Bozzi**
 
@@ -105,12 +109,12 @@ class MyApp extends StatelessWidget {
     // Build method returns the widget's user interface
     return MaterialApp(
       debugShowCheckedModeBanner: true,              // Show a Debug banner on top-right corner during development
-      title: 'RoburFitX',
+      title: appName,
       theme: ThemeData(colorScheme: lightScheme),
       darkTheme: ThemeData(colorScheme: darkScheme),
       themeMode: ThemeMode.system,                    // Change theme along with system
       home: const MyHomePage(                         // MyHomePage is widget with a state, it changes! containing the app scheleton: Scaffold
-        title: 'RoburFitX',
+        title: appName,
         ),
     );
   }
@@ -206,39 +210,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: NavigationBar( //set a list of pages at the bottom. when pressed all the screen change throg the selected page.
-        destinations: [
-          NavigationDestination(icon: Icon(Icons.calendar_today), label: 'Calendar'),
-          NavigationDestination(icon: Icon(Icons.fitness_center_rounded), label: 'Workouts'),
-        ],
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: .center,
-          children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: NavBarWidget(),
+      body: WidgetTree(),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
