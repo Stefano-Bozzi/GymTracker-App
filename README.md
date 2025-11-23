@@ -43,7 +43,7 @@ Please include a clear and detailed description of your changes or suggestions.
 ## License
 The code is released under the MIT License. The MIT License is a permissive software license from the Massachusetts Institute of Technology that places very few restrictions on reuse. For more details and the complete license text, see the [LICENSE.md](./LICENSE.md) file.
 
-This project uses packages required for proper functionality, already included and automatically installed via Flutter and Android Studio. Third-party licenses have been grouped in the [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md) file.
+This project uses packages required for proper functionality, many of which are already included and automatically installed via Flutter and Android Studio. Third-party licenses have been grouped in the [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md) file.
 
 
 ## Author
