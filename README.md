@@ -1,16 +1,16 @@
-# GainFlow
+# RoburFitX
 _Fitness App to track your gym progress – Built with Flutter & Android Studio_
 
-[![GitHub Release](https://img.shields.io/github/v/release/Stefano-Bozzi/GainFlow)](https://github.com/Stefano-Bozzi/GainFlow/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/Stefano-Bozzi/GainFlow/blob/master/LICENSE)
+[![GitHub Release](https://img.shields.io/github/v/release/Stefano-Bozzi/RoburFitX-App)](https://github.com/Stefano-Bozzi/RoburFitX-App/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/Stefano-Bozzi/RoburFitX-App/blob/master/LICENSE)
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-blue.svg)](https://flutter.dev/)
 [![Dart](https://img.shields.io/badge/Dart-3.x-blue.svg)](https://dart.dev/)
 [![Android Studio](https://img.shields.io/badge/Android%20Studio-Otter%202025.x-blue.svg)](https://developer.android.com/studio)
-[![Status](https://img.shields.io/badge/status-active--development-yellow.svg)](https://github.com/Stefano-Bozzi/GainFlow)
+[![Status](https://img.shields.io/badge/status-active--development-yellow.svg)](https://github.com/Stefano-Bozzi/RoburFitX-App)
 
 
 
-**GainFlow** is an app developed for smartphones that helps users track their gym workouts and monitor their progress over time.
+**RoburFitX** is an app developed for smartphones that helps users track their gym workouts and monitor their progress over time.
 
 ### Core Features
 ⚠️ Warning! Under development!
@@ -30,7 +30,7 @@ Future features will be:
 ⚠️ Warning! Under development!
 
 ## History
-See the file [CHANGELOG.md](https://github.com/Stefano-Bozzi/GainFlow/blob/master/CHANGELOG.md).
+See the file [CHANGELOG.md](https://github.com/Stefano-Bozzi/RoburFitX-App/blob/master/CHANGELOG.md).
 
 ## Contributing
 

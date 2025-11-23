@@ -8,7 +8,7 @@
 // https://pub.dev/packages/dart_pubspec_licenses
 
 /// This package.
-const thisPackage = _gainflow;
+const thisPackage = _robur_fit_x;
 
 /// All dependencies including transitive dependencies.
 const allDependencies = <Package>[
@@ -49,6 +49,7 @@ const allDependencies = <Package>[
   _leak_tracker_flutter_testing,
   _leak_tracker_testing,
   _lints,
+  _logger,
   _logging,
   _markdown,
   _markdown_widget,
@@ -64,6 +65,7 @@ const allDependencies = <Package>[
   _pool,
   _pub_semver,
   _pubspec_parse,
+  _rename,
   _retry,
   _safe_url_check,
   _scroll_to_index,
@@ -112,7 +114,8 @@ const dependencies = <Package>[
 /// Direct `dev_dependencies`.
 const devDependencies = <Package>[
   _flutter_lints,
-  _dart_pubspec_licenses
+  _dart_pubspec_licenses,
+  _rename
 ];
 
 /// Package license definition.
@@ -1969,6 +1972,43 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
   );
 
+/// logger 2.6.2
+const _logger = Package(
+    name: 'logger',
+    description: 'Small, easy to use and extensible logger which prints beautiful logs.',
+    repository: 'https://github.com/SourceHorizon/logger',
+    authors: [],
+    version: '2.6.2',
+    spdxIdentifiers: ['MIT'],
+    isMarkdown: false,
+    isSdk: false,
+    dependencies: [PackageRef('meta')],
+    devDependencies: [PackageRef('test'), PackageRef('lints'), PackageRef('file')],
+    license: '''MIT License
+
+Copyright (c) 2019 Simon Leier
+Copyright (c) 2019 Harm Aarts
+Copyright (c) 2023 Severin Hamader
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.''',
+  );
+
 /// logging 1.3.0
 const _logging = Package(
     name: 'logging',
@@ -2769,6 +2809,36 @@ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
+  );
+
+/// rename 3.1.0
+const _rename = Package(
+    name: 'rename',
+    description: 'Helps you to change or rename your flutter project BundleId and AppName for Ios, Android, MacOS and Linux platforms',
+    homepage: 'https://github.com/onatcipli/rename.git',
+    authors: [],
+    version: '3.1.0',
+    spdxIdentifiers: ['MIT'],
+    isMarkdown: false,
+    isSdk: false,
+    dependencies: [PackageRef('args'), PackageRef('logger'), PackageRef('path')],
+    devDependencies: [PackageRef('test')],
+    license: '''Copyright (c) 2019 Onat Çipli
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.''',
   );
 
 /// retry 3.1.2
@@ -4789,17 +4859,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
   );
 
-/// gainflow 0.1.0+1
-const _gainflow = Package(
-    name: 'gainflow',
-    description: 'A new Flutter project.',
+/// robur_fit_x 0.1.0+1
+const _robur_fit_x = Package(
+    name: 'robur_fit_x',
+    description: 'A simple app to track gym progress and results, developed with Flutter and Android Studio.',
     authors: [],
     version: '0.1.0+1',
     spdxIdentifiers: ['MIT'],
     isMarkdown: true,
     isSdk: false,
     dependencies: [PackageRef('flutter'), PackageRef('cupertino_icons'), PackageRef('markdown_widget')],
-    devDependencies: [PackageRef('flutter_lints'), PackageRef('dart_pubspec_licenses')],
+    devDependencies: [PackageRef('flutter_lints'), PackageRef('dart_pubspec_licenses'), PackageRef('rename')],
     license: '''Copyright (c) 2025, Stefano Bozzi
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:

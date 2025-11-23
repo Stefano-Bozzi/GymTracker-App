@@ -10,7 +10,7 @@ import 'package:markdown_widget/markdown_widget.dart';    // needed for Third Pa
 class LicensesPage extends StatelessWidget {              // define a class without a state
   const LicensesPage({super.key});                        // constructor
   final String myLicenseText = '''
-# 📜 License GainFlow
+# 📜 License RoburFitX
 
 **Copyright (c) 2025, Stefano Bozzi**
 
@@ -105,12 +105,12 @@ class MyApp extends StatelessWidget {
     // Build method returns the widget's user interface
     return MaterialApp(
       debugShowCheckedModeBanner: true,              // Show a Debug banner on top-right corner during development
-      title: 'GainFlow',
+      title: 'RoburFitX',
       theme: ThemeData(colorScheme: lightScheme),
       darkTheme: ThemeData(colorScheme: darkScheme),
       themeMode: ThemeMode.system,                    // Change theme along with system
       home: const MyHomePage(                         // MyHomePage is widget with a state, it changes! containing the app scheleton: Scaffold
-        title: 'GainFlow',
+        title: 'RoburFitX',
         ),
     );
   }

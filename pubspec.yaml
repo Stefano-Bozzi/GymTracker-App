@@ -1,5 +1,5 @@
-name: gainflow
-description: "A new Flutter project."
+name: robur_fit_x
+description: "A simple app to track gym progress and results, developed with Flutter and Android Studio."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -47,6 +47,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
   dart_pubspec_licenses: ^3.0.14
+  rename: ^3.1.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
