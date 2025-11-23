@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:robur_fit_x/data/notifiers.dart';
 import '../main.dart';
 import 'package:robur_fit_x/views/pages/calendar_page.dart';
 import 'package:robur_fit_x/views/pages/home_page.dart';
@@ -22,7 +23,9 @@ class WidgetTree extends StatelessWidget {
         // the App.build method, and use it to set our appbar title.
         title: Text(appName),
       ),
-      body: pages.elementAt(0),
+      body: ValueListenableBuilder(valueListenable: selectedPageNotifier, builder: (context, selectedPage, child) {
+        return pages.elementAt(selectedPage);
+      },),
     );
   }
 }
