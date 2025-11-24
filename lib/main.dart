@@ -2,67 +2,13 @@
 // IMPORT AND OVERALL VARIABLES DEFINITION
 //----------------------------------------------------------------
 
-import 'package:flutter/material.dart';                   // Import Flutter Material library for UI widgets and themes
-import 'package:flutter/services.dart' show rootBundle;   // Import class to interact with system services
-                                                          // rootBundel is needet to have access to "-access" files
-import 'package:markdown_widget/markdown_widget.dart';    // needed for Third Party Licenses display
+import 'package:flutter/material.dart';                   // Import Flutter Material library for UI widgets and themes                                                          // rootBundel is needet to have access to "-access" files
 import 'package:robur_fit_x/views/widget_tree.dart';
-import 'views/widgets/navbar_widget.dart';
+import 'package:robur_fit_x/views/widgets/appdrawer_widget.dart';
+import 'package:robur_fit_x/views/widgets/navbar_widget.dart';
 
 const String appName = "RoburFitX";
 
-class LicensesPage extends StatelessWidget {              // define a class without a state
-  const LicensesPage({super.key});                        // constructor
-  final String myLicenseText = '''
-# 📜 License $appName
-
-**Copyright (c) 2025, Stefano Bozzi**
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-''';
-
-  // Function to upload all third-party licenses .md file
-  // Function returns a Future<String>, meaning it promises to deliver a String 
-  // at some point later (asynchronously). The 'async' keyword allows the use of 'await'.
-  Future<String> _loadLicenses() async {
-    try {
-      final thirdPartyLicenses = await rootBundle.loadString('THIRD_PARTY_LICENSES.md');
-      
-      return myLicenseText + thirdPartyLicenses;
-    } catch (e) {
-      return 'Error During file upload: THIRD_PARTY_LICENSES.md file not found. Make shure is defined in pubspec.yaml. Error: $e';
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Licenses and Information'),
-      ),
-      // FutureBuilder load the page in asyncronous mode
-      body: FutureBuilder<String>(
-        future: _loadLicenses(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } 
-          
-          // when redy renders the MD file
-          return MarkdownWidget(
-            data: snapshot.data ?? 'Data are not available',
-            // optional, text not touching screen side
-            padding: const EdgeInsets.all(16.0), 
-          );
-        },
-      ),
-    );
-  }
-}
 
 // Define Colors for Light and Dark mode
 final lightScheme = ColorScheme(
@@ -151,65 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero, //overlap the animation on status bar, but infor are still visible (time, notifications, etc.)
-          children: <Widget>[
-            // Drawer Title
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              child: Text(
-                'Options',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            
-            // I want the Drawer to have:
-            // Statistics for graphs, 
-            // Settings for future fixed theme or reset,
-            // Liceses for legal security 
-
-            // Statistics
-            ListTile(
-              leading: const Icon(Icons.bar_chart_rounded),
-              title: const Text('Statistics'),
-              onTap: () {
-                // here the logic 
-              },
-            ),
-            
-            // Settings
-            ListTile(
-              leading: const Icon(Icons.settings_rounded),
-              title: const Text('Settings'),
-              onTap: () {
-                // here the logic
-                // Navigator.pop(context); 
-              },
-            ),
-            
-            // Licenses
-            ListTile(
-              leading: const Icon(Icons.attribution_rounded),
-              title: const Text('Licenses'),
-              onTap: () {
-                Navigator.pop(context); // close the drawer
-                // go to licenses page
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const LicensesPage(),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: AppDrawerWidget(),
       bottomNavigationBar: NavBarWidget(),
       body: WidgetTree(),
       floatingActionButton: FloatingActionButton(
