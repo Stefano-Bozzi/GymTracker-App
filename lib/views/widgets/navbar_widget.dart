@@ -1,3 +1,7 @@
+//________________________________________________________________
+// DRAWER: widget for custom Navigation Bar
+//________________________________________________________________
+
 import 'package:flutter/material.dart';
 import 'package:robur_fit_x/data/notifiers.dart';
 

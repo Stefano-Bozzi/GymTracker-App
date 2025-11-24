@@ -1,3 +1,7 @@
+//________________________________________________________________
+// CALENDAR: page that contains the workout history
+//________________________________________________________________
+
 import 'package:flutter/material.dart';
 
 class CalendarPage extends StatelessWidget {

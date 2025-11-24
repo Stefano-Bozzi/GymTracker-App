@@ -1,3 +1,7 @@
+//________________________________________________________________
+// DRAWER: widget for custom Drawer
+//________________________________________________________________
+
 import 'package:flutter/material.dart';
 import 'package:robur_fit_x/views/pages/licenses_page.dart';
 

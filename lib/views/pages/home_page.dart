@@ -1,3 +1,7 @@
+//________________________________________________________________
+// HOME: page that contains welcome and general info/istructions
+//________________________________________________________________
+
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {

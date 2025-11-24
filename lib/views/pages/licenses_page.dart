@@ -1,7 +1,11 @@
+//________________________________________________________________
+// LICENSES: license page with app and third-party licenses
+//________________________________________________________________
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;   // Import class to interact with system services
+import 'package:robur_fit_x/constants/constants.dart';
 import 'package:markdown_widget/markdown_widget.dart';    // needed for Third Party Licenses display
-import 'package:robur_fit_x/main.dart';
 
 class LicensesPage extends StatelessWidget {              // define a class without a state
   const LicensesPage({super.key});                        // constructor
