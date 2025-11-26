@@ -1,5 +1,5 @@
 //________________________________________________________________
-// DRAWER: widget for custom Navigation Bar
+// NAVBAR: widget for custom Navigation Bar
 //________________________________________________________________
 
 import 'package:flutter/material.dart';
