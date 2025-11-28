@@ -18,59 +18,129 @@
 // CLASSES--------------------------------------------------------
 
 /// Number of sets of multiple repetitions of the same exercise.
-class WorkoutSet {
+///
+/// Automatically computes the **e1RM** (*Estimated 1-Rep Max*):
+/// `e1RM = weight * (1 + reps / 30)`.
+///
+/// ### Fields
+/// - `reps`: repetitions (>= 0)
+/// - `weight`: weight (>= 0)
+/// - `e1RM`: estimated one-rep max
+///
+/// ### Requirements
+/// - `reps` and `weight` must be >= 0 (assert).
+///
+/// ### Comparison
+/// - `==` → equality based on `reps` and `weight`
+/// - `compareTo` → comparison based on `e1RM` (for sorting and progression)
+class WorkoutSet implements Comparable<WorkoutSet> {
   final int reps;
   final double weight;
 
-  WorkoutSet({
-    required this.reps,
-    required this.weight,
-  });
+  // The metric for comparison and progression is the e1RM = Estimated One-Repetition Maximum
+  final double e1RM;
 
-  // Define a method to compare 2 WorkoutSets
+  WorkoutSet({required this.reps, required this.weight})
+    : assert(reps >= 0, 'Reps cannot be negative'),
+        assert(weight >= 0, 'Weight cannot be negative'),
+        e1RM = weight * (1 + reps / 30);
+
+  // Define a method to compare 2 WorkoutSets for <,=,>
   @override
-  bool operator ==(Object other) {
-    
-    if (other is WorkoutSet){
-
-      return ((reps == other.reps)&&(weight == other.weight));
-
-    }
-    return false;
+  int compareTo(WorkoutSet other) {
+    return e1RM.compareTo(other.e1RM);
   }
-
-  @override
-  int get hashCode => Object.hash(reps, weight);
 }
 
-/// The specific exercise to be done.
-class Exercise {
+/// The specific exercise to be done consisting of one or more workout sets.
+///
+/// ### Fields
+/// - `name`: exercise name (non-empty)
+/// - `sets`: list of performed sets (must have ≥ 1)
+/// - `orderedSets`: sets sorted by e1RM descending (auto-generated)
+///
+/// ### Requirements
+/// - `name` must not be empty
+/// - `sets` must contain at least one `WorkoutSet`
+///
+/// ### Comparison
+/// - Can compare two exercises **only if they have the same name**
+/// - `compareTo` compares exercises by sorting their sets by e1RM and
+///   comparing them pairwise  
+///   → if all sets are equal, the exercise with more sets wins
+///
+/// Throws:
+/// - `ArgumentError` if trying to compare exercises with different names
+class Exercise implements Comparable<Exercise> {
   final String name;
   final List<WorkoutSet> sets;
+  final List<WorkoutSet> orderedSets;
 
-  Exercise({
-    required this.name,
-    required this.sets,
-  });
-
-  // Define a method to compare 2 Exercises
-  @override
-  bool operator ==(Object other) {
-    
-    if (other is Exercise){
-
-      return ((name == other.name)&&(sets == other.sets));
-
+  // Define a method to check if comparison is possible
+  bool isComparable(Exercise other) {
+    if (name == other.name) {
+      return true;
     }
     return false;
   }
 
-  @override
-  int get hashCode => Object.hash(name, sets);
+  Exercise({required this.name, required this.sets})
+    : assert(name != "", 'Must have a name'),
+      assert(sets.isNotEmpty, 'Must have at least 1 set'),
+      orderedSets = List<WorkoutSet>.from(
+        sets
+            .toList() // need a copy of sets
+          ..sort(
+            (a, b) => b.e1RM.compareTo(a.e1RM),
+          ), // this modify the list in place
+      );
 
+  // Define a method to compare 2 WorkoutSets for <,=,>
+  @override
+  int compareTo(Exercise other) {
+    if (!isComparable(other)) {
+      // Rais Error
+      throw ArgumentError(
+        'Cannot compare performance between different exercises: "$name" and "${other.name}".',
+      );
+    }
+    List<WorkoutSet> listA = orderedSets;
+    List<WorkoutSet> listB = other.orderedSets;
+
+    // Find minimum lenght, if all sets are =, wins wich has more sets
+    final int minLength = (listA.length < listB.length)
+        ? listA.length
+        : listB.length;
+
+    for (int i = 0; i < minLength; i++) {
+      final WorkoutSet setA = listA[i];
+      final WorkoutSet setB = listB[i];
+
+      // Check for winner wrt e1RM
+      final int comparison = setA.compareTo(setB);
+
+      if (comparison != 0) {
+        // If yes: return the comparison
+        return comparison;
+      }
+    }
+    // If all sets are =, return the exercise with more sets
+    return listA.length.compareTo(listB.length);
+  }
 }
 
 /// The entire workout, with exercises, sets, reps and weights.
+///
+/// A workout has a `name` and a list of `Exercise` entries, each made of
+/// sets, reps, and weights.
+///
+/// ### Fields
+/// - `name`: workout name (non-empty)
+/// - `exercises`: list of exercises (must have ≥ 1)
+///
+/// ### Requirements
+/// - `name` must not be empty
+/// - `exercises` must contain at least one `Exercise`
 class Workout {
   final String name;
   final List<Exercise> exercises;
@@ -78,21 +148,7 @@ class Workout {
   Workout({
     required this.name,
     required this.exercises,
-  });
-
-  // Define a method to compare 2 Workouts
-  @override
-  bool operator ==(Object other) {
-    
-    if (other is Workout){
-
-      return ((name == other.name)&&(exercises == other.exercises));
-
-    }
-    return false;
-  }
-
-  @override
-  int get hashCode => Object.hash(name, exercises);
+  }): assert(name != "", 'Must have a name'),
+      assert(exercises.isNotEmpty, 'Must have at least 1 exercise');
 
 }
