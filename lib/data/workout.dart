@@ -3,6 +3,7 @@
 //________________________________________________________________
 /* Classes Structure:
 
+classes for storing data
 -Workout
   |- name
   |- exercises (in variable number)
@@ -13,6 +14,15 @@
                       |- repetitions
                       |- weight
 
+classes for saving workout template
+-TemplateWorkout
+  |- name
+  |- exercises (in variable number)
+       |- TemplateExercise
+            |- name
+            |- sets (in variable number)
+                 |- TemplateSet
+                      |- repetitions
 */
 
 // CLASSES--------------------------------------------------------
@@ -85,8 +95,8 @@ class Exercise implements Comparable<Exercise> {
   }
 
   Exercise({required this.name, required this.sets})
-    : assert(name != "", 'Must have a name'),
-      assert(sets.isNotEmpty, 'Must have at least 1 set'),
+    : assert(name != "", 'Exercise must have a name'),
+      assert(sets.isNotEmpty, 'Exercise must have at least 1 set'),
       orderedSets = List<WorkoutSet>.from(
         sets
             .toList() // need a copy of sets
@@ -148,7 +158,70 @@ class Workout {
   Workout({
     required this.name,
     required this.exercises,
-  }): assert(name != "", 'Must have a name'),
-      assert(exercises.isNotEmpty, 'Must have at least 1 exercise');
+  }): assert(name != "", 'Workout must have a name'),
+      assert(exercises.isNotEmpty, 'Workout must have at least 1 exercise');
 
+}
+
+
+//________________________________________________________________
+// TEMPLATE WORKOUT: classes for saving workout templates
+//________________________________________________________________
+
+/// A template for a single set inside a workout template.
+/// Unlike WorkoutSet, this does NOT require weight or precise reps.
+///
+/// Fields:
+/// - reps: optional indication of planned reps (nullable)
+///
+/// Requirements:
+/// - reps >= 0 if provided
+class TemplateSet {
+  final int? reps;
+
+  TemplateSet({this.reps})
+      : assert(reps == null || reps >= 0, 'Reps cannot be negative');
+}
+
+
+/// A template for an exercise inside a workout template.
+///
+/// Fields:
+/// - name: exercise name (non-empty)
+/// - sets: list of TemplateSet (must have ≥ 1)
+///
+/// Requirements:
+/// - name must not be empty
+/// - sets must contain at least one TemplateSet
+class TemplateExercise {
+  final String name;
+  final List<TemplateSet> sets;
+
+  TemplateExercise({
+    required this.name,
+    required this.sets,
+  })  : assert(name != "", 'Exercise must have a name'),
+        assert(sets.isNotEmpty, 'Exercise must have at least 1 set');
+}
+
+
+/// A workout template, containing only the structure of the workout,
+/// not the real performance values.
+///
+/// Fields:
+/// - name: template name (non-empty)
+/// - exercises: list of TemplateExercise (must have ≥ 1)
+///
+/// Requirements:
+/// - name must not be empty
+/// - exercises must contain at least 1 TemplateExercise
+class TemplateWorkout {
+  final String name;
+  final List<TemplateExercise> exercises;
+
+  TemplateWorkout({
+    required this.name,
+    required this.exercises,
+  })  : assert(name != "", 'Workout must have a name'),
+        assert(exercises.isNotEmpty, 'Workout must have at least 1 exercise');
 }
