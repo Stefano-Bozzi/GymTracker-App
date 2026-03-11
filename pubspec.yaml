@@ -36,6 +36,12 @@ dependencies:
   cupertino_icons: ^1.0.8
   markdown_widget: ^2.3.2
 
+  # Create and manage workout data with a database structure
+  isar: ^3.1.0+1
+  # manage path
+  path_provider: ^2.1.5
+  isar_flutter_libs: ^3.1.0+1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -48,6 +54,8 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   dart_pubspec_licenses: ^3.0.14
   rename: ^3.1.0
+  isar_generator: ^3.1.0+1
+  build_runner: ^2.4.13
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
