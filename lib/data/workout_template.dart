@@ -1,15 +1,19 @@
-
-
 //________________________________________________________________
 // TEMPLATE WORKOUT: classes for saving workout templates
 //________________________________________________________________
 
+import 'package:robur_fit_x/data/workout_isar.dart';
 
 class TemplateSet {
   final int? reps;
 
   TemplateSet({this.reps})
       : assert(reps == null || reps >= 0, 'Reps cannot be negative');
+      
+  IsarTemplateSet toIsar(){
+    return IsarTemplateSet()
+      ..reps = reps;
+  }
 }
 
 class TemplateExercise {
@@ -21,6 +25,13 @@ class TemplateExercise {
     required this.sets,
   })  : assert(name != "", 'Exercise must have a name'),
         assert(sets.isNotEmpty, 'Exercise must have at least 1 set');
+
+  IsarTemplateExercise toIsar(){
+    return IsarTemplateExercise(
+      name : name, 
+      sets : sets.map((element)=> element.toIsar()).toList()
+      );
+  }
 }
 
 class TemplateWorkout {
@@ -32,4 +43,11 @@ class TemplateWorkout {
     required this.exercises,
   })  : assert(name != "", 'Workout must have a name'),
         assert(exercises.isNotEmpty, 'Workout must have at least 1 exercise');
+
+  IsarTemplateWorkout toIsar(){
+    return IsarTemplateWorkout(
+      name : name,
+      exercises : exercises.map((element)=>element.toIsar()).toList()
+      );
+  }
 }
