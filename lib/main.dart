@@ -9,12 +9,27 @@
 import 'package:flutter/material.dart';                   // Imports the Flutter Material library for UI widgets and themes.
 import 'package:robur_fit_x/views/widget_tree.dart';      // Imports the primary Widget that defines the application structure (Scaffold, Navigation).
 import 'package:robur_fit_x/constants/constants.dart';    // Imports global constants like the app name and theme definitions.
+import 'package:isar/isar.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:robur_fit_x/data/workout_isar.dart';
+
+// global var to sign in to database into app
+late Isar isar;
 
 //----------------------------------------------------------------
 // RUN THE APP
 //----------------------------------------------------------------
 
-void main() {
+void main() async{
+
+  WidgetsFlutterBinding.ensureInitialized();
+  // Database initialization
+  final dir = await getApplicationDocumentsDirectory();
+  isar = await Isar.open(
+    [IsarWorkoutSchema, IsarTemplateWorkoutSchema],
+    directory: dir.path,
+  );
+
   runApp(const MyApp()); // Launches the Flutter application.
 }
 
