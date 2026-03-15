@@ -4,6 +4,7 @@ import 'package:isar/isar.dart';
 import 'package:robur_fit_x/data/workout.dart';
 import 'package:robur_fit_x/data/workout_template.dart';
 
+part 'workout_isar.g.dart';
 
 @collection
 class IsarWorkout {
