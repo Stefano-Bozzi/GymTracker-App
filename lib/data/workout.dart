@@ -1,4 +1,5 @@
 import 'package:robur_fit_x/data/workout_isar.dart';
+import 'package:isar/isar.dart';
 
 class WorkoutSet {
   final int reps;
@@ -46,8 +47,10 @@ class Workout {
   final List<Exercise> exercises;
   final DateTime date;
   final double totVolume;
+  final int? id;
 
   Workout({
+    this.id,
     required this.name,
     required this.exercises,
     DateTime? date,
@@ -59,6 +62,7 @@ class Workout {
 
   IsarWorkout toIsar(){
     return IsarWorkout()
+    ..id = id ?? Isar.autoIncrement
     ..name = name
     ..date = date
     ..totVolume = totVolume

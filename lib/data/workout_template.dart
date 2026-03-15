@@ -3,6 +3,7 @@
 //________________________________________________________________
 
 import 'package:robur_fit_x/data/workout_isar.dart';
+import 'package:isar/isar.dart';
 
 class TemplateSet {
   final int? reps;
@@ -27,27 +28,28 @@ class TemplateExercise {
         assert(sets.isNotEmpty, 'Exercise must have at least 1 set');
 
   IsarTemplateExercise toIsar(){
-    return IsarTemplateExercise(
-      name : name, 
-      sets : sets.map((element)=> element.toIsar()).toList()
-      );
+    return IsarTemplateExercise()
+      ..name = name 
+      ..sets = sets.map((element)=> element.toIsar()).toList();
   }
 }
 
 class TemplateWorkout {
+  final int? id;
   final String name;
   final List<TemplateExercise> exercises;
 
   TemplateWorkout({
+    this.id,
     required this.name,
     required this.exercises,
   })  : assert(name != "", 'Workout must have a name'),
         assert(exercises.isNotEmpty, 'Workout must have at least 1 exercise');
 
   IsarTemplateWorkout toIsar(){
-    return IsarTemplateWorkout(
-      name : name,
-      exercises : exercises.map((element)=>element.toIsar()).toList()
-      );
+    return IsarTemplateWorkout()
+      ..name = name
+      ..exercises = exercises.map((element)=>element.toIsar()).toList()
+      ..id = id ?? Isar.autoIncrement;
   }
 }

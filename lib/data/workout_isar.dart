@@ -15,6 +15,7 @@ class IsarWorkout {
 
   Workout toDomain(){
     return Workout(
+      id : id,
       name: name, 
       date : date,
       totVolume: totVolume,
@@ -58,18 +59,13 @@ class IsarWorkoutSet {
 
 @collection
 class IsarTemplateWorkout {
+  Id id = Isar.autoIncrement;
   late String name;
   late List<IsarTemplateExercise> exercises;
 
-
-  IsarTemplateWorkout({
-    required this.name,
-    required this.exercises,
-  })  : assert(name != "", 'Workout must have a name'),
-        assert(exercises.isNotEmpty, 'Workout must have at least 1 exercise');
-  
   TemplateWorkout toDomain(){
     return TemplateWorkout(
+      id: id,
       name: name, 
       exercises: exercises.map((e) => e.toDomain()).toList()
       );
@@ -81,12 +77,6 @@ class IsarTemplateExercise {
   late String name;
   late List<IsarTemplateSet> sets;
 
-  IsarTemplateExercise({
-    required this.name,
-    required this.sets,
-  })  : assert(name != "", 'Exercise must have a name'),
-        assert(sets.isNotEmpty, 'Exercise must have at least 1 set');
-    
   TemplateExercise toDomain(){
     return TemplateExercise(
       name: name, 
@@ -97,10 +87,7 @@ class IsarTemplateExercise {
 
 @embedded
 class IsarTemplateSet {
-  late int? reps;
-
-  IsarTemplateSet({this.reps})
-      : assert(reps == null || reps >= 0, 'Reps cannot be negative');
+  int? reps;
 
   TemplateSet toDomain(){
     return TemplateSet(
