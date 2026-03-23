@@ -22,3 +22,11 @@ class _CreateTemplateSheet extends StatefulWidget {
   @override
   State<_CreateTemplateSheet> createState() => _CreateTemplateSheetState();
 }
+
+/// State for [`_CreateTemplateSheet`] that preserves user input across rebuilds.
+/// Holds the template name controller and a list of exercises
+/// (each with its own controller and set count).
+class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
+  final TextEditingController _templateWorkoutName = TextEditingController();
+  final List<Map<String, dynamic>> _exercises = [];
+}
