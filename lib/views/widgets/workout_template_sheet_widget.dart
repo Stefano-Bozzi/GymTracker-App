@@ -64,23 +64,42 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
   return Padding(
     padding: EdgeInsets.only(bottom: bottomPadding, left: 16, right: 16, top: 16),
     child: Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
+        const Text('Create New Workout Template', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        const SizedBox(height: 36),   
+    
         // Template Workout Name
         TextField(
           controller: _templateWorkoutName,
-          decoration: InputDecoration(labelText: 'Workout Name'),
+          decoration: InputDecoration(labelText: 'Workout Name', border: OutlineInputBorder()),
         ),
 
+        const SizedBox(height: 36),
         // create a flexible list to manage exercises definitions
         Flexible(
           child: ListView.builder(
+            shrinkWrap: true,
             itemCount: _exercises.length,
             itemBuilder: (context, index){
             final exc = _exercises[index];
-              return TextField(
-                        controller: exc['nameController'],
-                        decoration: InputDecoration(labelText: 'Exercise ${index + 1}'),
-                      );
+              return Card(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            controller: exc['nameController'],
+                            decoration: InputDecoration(labelText: 'Exercise ${index + 1}'),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                      ],
+                    ),
+                  ),
+                );
             }// create the item
           ),
         ),
