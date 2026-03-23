@@ -28,5 +28,16 @@ class _CreateTemplateSheet extends StatefulWidget {
 /// (each with its own controller and set count).
 class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
   final TextEditingController _templateWorkoutName = TextEditingController();
+  // temporary list to manage space before saving
   final List<Map<String, dynamic>> _exercises = [];
+
+  // function to add a new exercise
+  void _addExercise() {
+    setState(() {
+      _exercises.add({
+        'nameController': TextEditingController(),
+        'sets': 1,
+      });
+    });
+  }
 }
