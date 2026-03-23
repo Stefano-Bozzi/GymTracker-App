@@ -45,6 +45,16 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
   // Creates domain objects and saves to Isar
   // ...
 
+  // Delate unnecessary information when exit
+  @override
+  void dispose() {
+    _templateWorkoutName.dispose();
+    for (var exc in _exercises) {
+      exc['nameController'].dispose();
+    }
+    super.dispose();
+  }
+
   // Graphics and UI
 @override
   Widget build(BuildContext context) {
