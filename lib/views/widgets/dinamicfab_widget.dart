@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:robur_fit_x/data/notifiers.dart';
-import 'package:robur_fit_x/data/workout_isar.dart';
+import 'package:robur_fit_x/views/widgets/workout_template_sheet_widget.dart';
 import 'package:robur_fit_x/main.dart';
 
 class DinamicFAB extends StatelessWidget {
@@ -45,7 +45,6 @@ class DinamicFAB extends StatelessWidget {
   // Defines the specific action to be executed when the FAB is pressed.
   void handleFabPress(BuildContext context, int selectedPage) {
     // You use the 'selectedPage' index to decide which logic to execute.
-    String actionMessage;
 
     switch (selectedPage) {
       case 0:
@@ -55,7 +54,7 @@ class DinamicFAB extends StatelessWidget {
         // ...
         break;
       case 2:
-        // ...
+        workoutTemplateCreation(context);
         break;
     }
   }
