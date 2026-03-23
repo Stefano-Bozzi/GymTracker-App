@@ -71,20 +71,46 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
           decoration: InputDecoration(labelText: 'Workout Name'),
         ),
 
-        // there will be a button to increase number of exercise
         // create a flexible list to manage exercises definitions
         Flexible(
           child: ListView.builder(
             itemCount: _exercises.length,
             itemBuilder: (context, index){
+            final exc = _exercises[index];
               return TextField(
-                        controller: // here the controller for single exercise
+                        controller: exc['nameController'],
                         decoration: InputDecoration(labelText: 'Exercise ${index + 1}'),
                       );
             }// create the item
           ),
-        )
+        ),
+        
+        const SizedBox(height: 36),
 
+        // Buttons to add exercises and save template
+        Row( // so buttons are on a single row
+
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Expanded(
+            child: FilledButton.icon(
+                onPressed: _addExercise,
+                icon: const Icon(Icons.add),
+                label: const Text('Add Exercise'),
+                ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+            child: FilledButton.icon(
+              onPressed: (){}, // here the saving
+              icon: const Icon(Icons.save),
+              label: const Text('Save'),
+              ),
+            )
+          ],
+        ),
+        
+        const SizedBox(height: 36), // Margine inferiore
       ],
     ),
   );
