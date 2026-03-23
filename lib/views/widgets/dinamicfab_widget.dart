@@ -4,16 +4,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:robur_fit_x/data/notifiers.dart';
-
-// --- Dynamic FAB Widget ---
-// Change action, text and icon accordingly to the page selected in navBar
+import 'package:robur_fit_x/data/workout_isar.dart';
+import 'package:robur_fit_x/main.dart';
 
 class DinamicFAB extends StatelessWidget {
   const DinamicFAB({super.key});
   
   // --- Dynamic FAB Helper Functions ---
-
-  // Determines the text label for the Floating Action Button based on the current page index.
+  /// Determines FAB text label based on current page index.
   String getFabLabel(int selectedPage) {
     switch (selectedPage) {
       case 0:
@@ -30,15 +28,15 @@ class DinamicFAB extends StatelessWidget {
     }
   }
 
-  // Determines the icon for the Floating Action Button based on the current page index.
+  /// Determines FAB icon based on current page index.
   IconData getFabIcon(int selectedPage) {
     switch (selectedPage) {
       case 0:
-        return Icons.play_arrow_rounded; // Start/Session icon
+        return Icons.play_arrow_rounded;
       case 1:
-        return Icons.play_arrow_rounded; // Add a routine/workout
+        return Icons.play_arrow_rounded;
       case 2:
-        return Icons.add_box_rounded; // Add a calendar item
+        return Icons.add_box_rounded;
       default:
         return Icons.add;
     }
@@ -51,27 +49,15 @@ class DinamicFAB extends StatelessWidget {
 
     switch (selectedPage) {
       case 0:
-        actionMessage = 'Starting a new Training Session...';
         // ...
         break;
       case 1:
-        actionMessage = 'Starting a new Training Session...';
         // ...
         break;
       case 2:
-        actionMessage = 'Opening New Activity form...';
         // ...
         break;
-      default:
-        actionMessage = 'Undefined action.';
     }
-
-    // Display a SnackBar for testing/debugging the action
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(actionMessage),
-      ),
-    );
   }
 
   @override
