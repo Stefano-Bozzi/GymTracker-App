@@ -31,8 +31,10 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
   final TextEditingController _templateWorkoutName = TextEditingController();
   // temporary list to manage space before saving
   final List<Map<String, dynamic>> _exercises = [];
+  // error message
+  String? _errorMessage;
 
-  // function to add a new exercise
+  /// function to add a new exercise
   void _addExercise() {
     setState(() {
       _exercises.add({
@@ -40,7 +42,51 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
         'sets': 1,
       });
     });
+    _errorMessage = null; // reset error message
   }
+
+void _showError(String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text("Attention", style: TextStyle(color: Colors.red)),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text("OK"),
+          ),
+        ],
+      ),
+    );
+  }
+
+void _saveTemplate(){
+  if (_templateWorkoutName.text.trim().isEmpty) {
+    _showError("Workout Template MUST have a name");
+    return;
+  }
+  if (_exercises.isEmpty) {
+    _showError("You MUST add at least one exercise");
+    return;
+  }
+  for (var exercise in _exercises) {
+    if (exercise['nameController'].text.trim().isEmpty) {
+    _showError("All Exercises MUST have a name");
+    return;  
+    }
+  }
+  // here the saving
+  setState(() => _errorMessage = null);
+
+  // Close popup
+  Navigator.pop(context);
+
+  // Successfully saving Message
+  ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(content: Text("Workout Template Successfully Saved")),
+  );
+}
 
   // Creates domain objects and saves to Isar
   // ...
@@ -137,7 +183,7 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
             const SizedBox(width: 16),
             Expanded(
             child: FilledButton.icon(
-              onPressed: (){}, // here the saving
+              onPressed: _saveTemplate,
               icon: const Icon(Icons.save),
               label: const Text('Save'),
               ),
@@ -145,7 +191,7 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
           ],
         ),
         
-        const SizedBox(height: 36), // Margine inferiore
+        const SizedBox(height: 36), // Bottom margin
       ],
     ),
   );
