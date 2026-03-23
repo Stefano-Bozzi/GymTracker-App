@@ -96,6 +96,22 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
                           ),
                         ),
                         const SizedBox(width: 16),
+                        // Sets counter
+                        Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.remove),
+                              onPressed: () => setState(() {
+                                if (exc['sets'] > 1) exc['sets']--;
+                              }),
+                            ),
+                            Text('${exc['sets']} Sets'),
+                            IconButton(
+                              icon: const Icon(Icons.add),
+                              onPressed: () => setState(() => exc['sets']++),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
