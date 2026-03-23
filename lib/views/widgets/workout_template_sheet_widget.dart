@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:isar/isar.dart';
 import 'package:robur_fit_x/data/notifiers.dart';
 import 'package:robur_fit_x/data/workout_isar.dart';
 import 'package:robur_fit_x/main.dart';
@@ -39,5 +40,43 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
         'sets': 1,
       });
     });
+  }
+
+  // Creates domain objects and saves to Isar
+  // ...
+
+  // Graphics and UI
+@override
+  Widget build(BuildContext context) {
+  // make always visible the box, rising it when keyboard is present
+  final bottomPadding = MediaQuery.of(context).viewInsets.bottom;
+  
+  return Padding(
+    padding: EdgeInsets.only(bottom: bottomPadding, left: 16, right: 16, top: 16),
+    child: Column(
+      children: [
+        // Template Workout Name
+        TextField(
+          controller: _templateWorkoutName,
+          decoration: InputDecoration(labelText: 'Workout Name'),
+        ),
+
+        // there will be a button to increase number of exercise
+        // create a flexible list to manage exercises definitions
+        Flexible(
+          child: ListView.builder(
+            itemCount: _exercises.length,
+            itemBuilder: (context, index){
+              return TextField(
+                        controller: // here the controller for single exercise
+                        decoration: InputDecoration(labelText: 'Exercise ${index + 1}'),
+                      );
+            }// create the item
+          ),
+        )
+
+      ],
+    ),
+  );
   }
 }
