@@ -65,8 +65,20 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
 
   // Creates domain objects and saves to Isar
   
+  /// Create TemplateWorkout from a current sheet state
+  TemplateWorkout createTemplateWorkout() {
+    String templateName = _templateWorkoutName.text;
+    List<TemplateExercise> exercises = [];
+    for (var exc in _exercises) {
+      List<TemplateSet> templateSet = List.generate(exc['sets'], (index) => TemplateSet(reps: null));
+      exercises.add(TemplateExercise(name: exc['nameController'].text, sets: templateSet));
+    }
+    return TemplateWorkout(name: templateName, exercises: exercises);
+  }
+
   /// Save a Template workout in smartphone storage
-  void _saveTemplate(){
+  Future<void> _saveTemplate() async{
+    // check before saving
     if (_templateWorkoutName.text.trim().isEmpty) {
       _showError("Workout Template MUST have a name");
       return;
@@ -82,7 +94,10 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
       }
     }
     // here the saving
-
+    TemplateWorkout finalWorkout = createTemplateWorkout();
+    await isar.writeTxn(() async {
+      await isar.isarTemplateWorkouts.put(finalWorkout.toIsar());
+    });
     // Close popup
     Navigator.pop(context);
 
