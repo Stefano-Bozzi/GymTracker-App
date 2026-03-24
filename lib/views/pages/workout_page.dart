@@ -71,8 +71,8 @@ class _WorkoutPageState extends State<WorkoutPage>{
                           children: [
                             IconButton(
                               icon: const Icon(Icons.delete, color: Color.fromARGB(255, 185, 35, 35),),
-                              onPressed: () => () {
-                              }),
+                              onPressed: () => deleteIsarElement(isar, isar.isarTemplateWorkouts, template.id, refreshWorkoutPageNotifier, context)
+                              ),
                               const SizedBox(width: 16),
                             IconButton(
                               icon: const Icon(Icons.edit),
