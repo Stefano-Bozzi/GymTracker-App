@@ -7,6 +7,7 @@ import 'package:isar/isar.dart';
 import 'package:robur_fit_x/main.dart';
 import 'package:robur_fit_x/data/notifiers.dart';
 import 'package:robur_fit_x/data/workout_isar.dart';
+import 'package:robur_fit_x/views/widgets/workout_template_sheet_widget.dart';
 
 class WorkoutPage extends StatefulWidget {
   const WorkoutPage({super.key});
@@ -72,17 +73,13 @@ class _WorkoutPageState extends State<WorkoutPage>{
                             IconButton(
                               icon: const Icon(Icons.delete, color: Color.fromARGB(255, 185, 35, 35),),
                               onPressed: () => deleteIsarElement(isar, isar.isarTemplateWorkouts, template.id, refreshWorkoutPageNotifier, context)
-                              ),
+                            ),
                               const SizedBox(width: 16),
                             IconButton(
                               icon: const Icon(Icons.edit),
-                              onPressed: () => () {
-                              }),
-                              const SizedBox(width: 16),
-                            IconButton(
-                              icon: const Icon(Icons.open_in_new_rounded),
-                              onPressed: () => () {
-                              }),
+                              onPressed: () => 
+                              workoutTemplateCreation(context,templateToEdit: template)
+                            ),
                           ],
                         )
                       ],

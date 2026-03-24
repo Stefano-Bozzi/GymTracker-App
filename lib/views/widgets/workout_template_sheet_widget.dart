@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:isar/isar.dart';
 import 'package:robur_fit_x/data/notifiers.dart';
 import 'package:robur_fit_x/data/workout_isar.dart';
 import 'package:robur_fit_x/data/workout_template.dart';
 import 'package:robur_fit_x/main.dart';
 
 /// Opens the BottomSheet to create a workout template.
-void workoutTemplateCreation(BuildContext context) {
+void workoutTemplateCreation(BuildContext context,{IsarTemplateWorkout? templateToEdit}) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
     useSafeArea: true,
-    builder: (context) => const _CreateTemplateSheet(),
+    builder: (context) => _CreateTemplateSheet(templateToEdit: templateToEdit),
   );
 }
 
 /// Stateful widget for template creation. 
 /// Uses a separate State class to preserve user input during UI rebuilds.
 class _CreateTemplateSheet extends StatefulWidget {
-  const _CreateTemplateSheet();
+  final IsarTemplateWorkout? templateToEdit;
+  const _CreateTemplateSheet({super.key, this.templateToEdit});
 
   // Instantiates and links the mutable state to this widget.
   @override
@@ -32,6 +32,22 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
   final TextEditingController _templateWorkoutName = TextEditingController();
   // temporary list to manage space before saving
   final List<Map<String, dynamic>> _exercises = [];
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.templateToEdit != null) {
+      _templateWorkoutName.text = widget.templateToEdit!.name;
+      
+      for (var exc in widget.templateToEdit!.exercises) {
+        _exercises.add({
+          'nameController': TextEditingController(text: exc.name),
+          'sets': exc.sets.length, // Contiamo quanti set aveva
+          'focusNode': FocusNode(),
+        });
+      }
+    }
+  }
 
   /// function to add a new exercise
   void _addExercise() {
@@ -73,7 +89,12 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
       List<TemplateSet> templateSet = List.generate(exc['sets'], (index) => TemplateSet(reps: null));
       exercises.add(TemplateExercise(name: exc['nameController'].text, sets: templateSet));
     }
-    return TemplateWorkout(name: templateName, exercises: exercises);
+    
+    if (widget.templateToEdit != null) {
+      return TemplateWorkout(id: widget.templateToEdit!.id, name: templateName, exercises: exercises);
+    } else {
+      return TemplateWorkout(name: templateName, exercises: exercises);
+    }
   }
 
   /// Save a Template workout in smartphone storage
