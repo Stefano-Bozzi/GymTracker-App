@@ -1,8 +1,10 @@
 import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 
 import 'package:robur_fit_x/data/workout.dart';
 import 'package:robur_fit_x/data/workout_template.dart';
+import 'package:robur_fit_x/main.dart';
 
 part 'workout_isar.g.dart';
 
@@ -96,3 +98,30 @@ class IsarTemplateSet {
       );
   }
 }
+
+/// Delate a general Isar Element
+Future<void> deleteIsarElement<T>(
+  Isar db,
+  IsarCollection collection,
+  int id,
+  ValueNotifier<bool> notifier,
+  BuildContext context,
+  ) async {
+
+  await db.writeTxn(() async {
+    // try to delate isar obj with current id
+    final success = await collection.delete(id);
+    
+    if (success) {
+      // change notifier to refresh pages
+      notifier.value = !notifier.value;
+    }
+  });
+
+  // Feedback message
+  if (context.mounted) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Succesfully Deleted")),
+    );
+  }
+} 
