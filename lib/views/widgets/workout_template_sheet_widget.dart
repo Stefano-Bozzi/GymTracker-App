@@ -36,13 +36,15 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
 
   /// function to add a new exercise
   void _addExercise() {
+    final newFocus = FocusNode(); // create a focus for keyboard
     setState(() {
       _exercises.add({
         'nameController': TextEditingController(),
         'sets': 1,
+        'focusNode': newFocus,
       });
     });
-    _errorMessage = null; // reset error message
+    newFocus.requestFocus(); // keyboard focus go to new focus
   }
 
 void _showError(String message) {
@@ -97,6 +99,7 @@ void _saveTemplate(){
     _templateWorkoutName.dispose();
     for (var exc in _exercises) {
       exc['nameController'].dispose();
+      exc['focusNode'].dispose();
     }
     super.dispose();
   }
@@ -138,6 +141,7 @@ void _saveTemplate(){
                         Expanded(
                           child: TextField(
                             controller: exc['nameController'],
+                            focusNode: exc['focusNode'],
                             decoration: InputDecoration(labelText: 'Exercise ${index + 1}'),
                           ),
                         ),
