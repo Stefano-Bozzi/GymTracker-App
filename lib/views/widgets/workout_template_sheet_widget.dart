@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 import 'package:robur_fit_x/data/notifiers.dart';
 import 'package:robur_fit_x/data/workout_isar.dart';
+import 'package:robur_fit_x/data/workout_template.dart';
 import 'package:robur_fit_x/main.dart';
 
 /// Opens the BottomSheet to create a workout template.
@@ -45,7 +46,8 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
     newFocus.requestFocus(); // keyboard focus go to new focus
   }
 
-void _showError(String message) {
+  /// Show an error message to ensure all fields are specified during workout creation
+  void _showError(String message) {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -61,34 +63,34 @@ void _showError(String message) {
     );
   }
 
-void _saveTemplate(){
-  if (_templateWorkoutName.text.trim().isEmpty) {
-    _showError("Workout Template MUST have a name");
-    return;
-  }
-  if (_exercises.isEmpty) {
-    _showError("You MUST add at least one exercise");
-    return;
-  }
-  for (var exercise in _exercises) {
-    if (exercise['nameController'].text.trim().isEmpty) {
-    _showError("All Exercises MUST have a name");
-    return;  
-    }
-  }
-  // here the saving
-
-  // Close popup
-  Navigator.pop(context);
-
-  // Successfully saving Message
-  ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(content: Text("Workout Template Successfully Saved")),
-  );
-}
-
   // Creates domain objects and saves to Isar
-  // ...
+  
+  /// Save a Template workout in smartphone storage
+  void _saveTemplate(){
+    if (_templateWorkoutName.text.trim().isEmpty) {
+      _showError("Workout Template MUST have a name");
+      return;
+    }
+    if (_exercises.isEmpty) {
+      _showError("You MUST add at least one exercise");
+      return;
+    }
+    for (var exercise in _exercises) {
+      if (exercise['nameController'].text.trim().isEmpty) {
+      _showError("All Exercises MUST have a name");
+      return;  
+      }
+    }
+    // here the saving
+
+    // Close popup
+    Navigator.pop(context);
+
+    // Successfully saving Message
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Workout Template Successfully Saved")),
+    );
+  }
 
   // Delate unnecessary information when exit
   @override
@@ -196,5 +198,5 @@ void _saveTemplate(){
       ],
     ),
   );
-  }
+ }
 }
