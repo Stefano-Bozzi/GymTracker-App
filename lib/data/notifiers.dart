@@ -6,3 +6,6 @@ import 'package:flutter/material.dart';
 
 // NavBar notifier for Home-Calendar-Workout pages
 ValueNotifier<int> selectedPageNotifier = ValueNotifier(0);
+
+// Refresh Workout Page when added a new template
+ValueNotifier<bool> refreshWorkoutPageNotifier = ValueNotifier(false);

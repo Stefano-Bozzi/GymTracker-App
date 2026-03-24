@@ -98,6 +98,8 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
     await isar.writeTxn(() async {
       await isar.isarTemplateWorkouts.put(finalWorkout.toIsar());
     });
+
+    refreshWorkoutPageNotifier.value = !refreshWorkoutPageNotifier.value;
     // Close popup
     Navigator.pop(context);
 
