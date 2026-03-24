@@ -108,7 +108,7 @@ Future<void> deleteIsarElement<T>(
   BuildContext context,
   ) async {
 
-  await isar.writeTxn(() async {
+  await db.writeTxn(() async {
     // try to delate isar obj with current id
     final success = await collection.delete(id);
     

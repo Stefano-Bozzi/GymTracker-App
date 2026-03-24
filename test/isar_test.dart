@@ -8,6 +8,7 @@ import 'package:robur_fit_x/data/workout_template.dart';
 
 void main() {
   late Isar isar;
+  late Directory tempDir;
 
   // Setup an empty database
   setUp(() async {
@@ -15,7 +16,7 @@ void main() {
     await Isar.initializeIsarCore(download: true);
     
     // Create a temporary folder, delated later
-    final tempDir = await Directory.systemTemp.createTemp('isar_test');
+    tempDir = await Directory.systemTemp.createTemp('isar_test');
 
     isar = await Isar.open(
       [IsarWorkoutSchema, IsarTemplateWorkoutSchema],
@@ -26,6 +27,9 @@ void main() {
   // Delate database after every test
   tearDown(() async {
     await isar.close(deleteFromDisk: true);
+    if (tempDir.existsSync()) {
+      tempDir.deleteSync(recursive: true);
+    }
   });
 
   test('Workout saving, reading and conversion', () async {
