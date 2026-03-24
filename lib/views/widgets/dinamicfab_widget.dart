@@ -4,16 +4,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:robur_fit_x/data/notifiers.dart';
-
-// --- Dynamic FAB Widget ---
-// Change action, text and icon accordingly to the page selected in navBar
+import 'package:robur_fit_x/views/widgets/workout_template_sheet_widget.dart';
+import 'package:robur_fit_x/main.dart';
 
 class DinamicFAB extends StatelessWidget {
   const DinamicFAB({super.key});
   
   // --- Dynamic FAB Helper Functions ---
-
-  // Determines the text label for the Floating Action Button based on the current page index.
+  /// Determines FAB text label based on current page index.
   String getFabLabel(int selectedPage) {
     switch (selectedPage) {
       case 0:
@@ -30,15 +28,15 @@ class DinamicFAB extends StatelessWidget {
     }
   }
 
-  // Determines the icon for the Floating Action Button based on the current page index.
+  /// Determines FAB icon based on current page index.
   IconData getFabIcon(int selectedPage) {
     switch (selectedPage) {
       case 0:
-        return Icons.play_arrow_rounded; // Start/Session icon
+        return Icons.play_arrow_rounded;
       case 1:
-        return Icons.play_arrow_rounded; // Add a routine/workout
+        return Icons.play_arrow_rounded;
       case 2:
-        return Icons.add_box_rounded; // Add a calendar item
+        return Icons.add_box_rounded;
       default:
         return Icons.add;
     }
@@ -47,31 +45,18 @@ class DinamicFAB extends StatelessWidget {
   // Defines the specific action to be executed when the FAB is pressed.
   void handleFabPress(BuildContext context, int selectedPage) {
     // You use the 'selectedPage' index to decide which logic to execute.
-    String actionMessage;
 
     switch (selectedPage) {
       case 0:
-        actionMessage = 'Starting a new Training Session...';
         // ...
         break;
       case 1:
-        actionMessage = 'Starting a new Training Session...';
         // ...
         break;
       case 2:
-        actionMessage = 'Opening New Activity form...';
-        // ...
+        workoutTemplateCreation(context);
         break;
-      default:
-        actionMessage = 'Undefined action.';
     }
-
-    // Display a SnackBar for testing/debugging the action
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(actionMessage),
-      ),
-    );
   }
 
   @override

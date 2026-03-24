@@ -49,10 +49,30 @@ app.*.map.json
 
 # Generated files
 *.g.dart
+.flutter-plugins
+.flutter-plugins-dependencies
 ## Isar Core Binaries
 libisar.dylib
 libisar.so
 isar.dll
+
+# Keys & Credentials
+.env
+*.env
+android/key.properties
+*.jks
+*.keystore
+ios/key.p8
+google-services.json
+GoogleService-Info.plist
+
+# iOS/macOS Dependencies (heavy uploads)
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/Flutter/Flutter.framework/
+**/ios/Flutter/Flutter.podspec
+**/macos/Pods/
+**/macos/Flutter/ephemeral/
 
 # temporary files
 temp_*
