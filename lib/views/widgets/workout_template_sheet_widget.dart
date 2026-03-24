@@ -31,8 +31,6 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
   final TextEditingController _templateWorkoutName = TextEditingController();
   // temporary list to manage space before saving
   final List<Map<String, dynamic>> _exercises = [];
-  // error message
-  String? _errorMessage;
 
   /// function to add a new exercise
   void _addExercise() {
@@ -79,7 +77,6 @@ void _saveTemplate(){
     }
   }
   // here the saving
-  setState(() => _errorMessage = null);
 
   // Close popup
   Navigator.pop(context);
