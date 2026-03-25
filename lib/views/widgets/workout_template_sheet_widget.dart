@@ -42,7 +42,7 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
       for (var exc in widget.templateToEdit!.exercises) {
         _exercises.add({
           'nameController': TextEditingController(text: exc.name),
-          'sets': exc.sets.length, // Contiamo quanti set aveva
+          'sets': exc.sets.length,
           'focusNode': FocusNode(),
         });
       }
@@ -197,6 +197,15 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
                               icon: const Icon(Icons.add),
                               onPressed: () => setState(() => exc['sets']++),
                             ),
+
+                            const SizedBox(width: 8),
+                            // Delete exercise button
+                                IconButton(
+                              icon: const Icon(Icons.delete, color: Color.fromARGB(255, 185, 35, 35),),
+                                  onPressed: () => setState(() {
+                                    _exercises.removeAt(index);
+                                  }),
+                                ),
                           ],
                         )
                       ],

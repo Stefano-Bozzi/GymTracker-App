@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:robur_fit_x/data/notifiers.dart';
 import 'package:robur_fit_x/views/widgets/workout_template_sheet_widget.dart';
+import 'package:robur_fit_x/views/widgets/workout_session_sheet_widget.dart';
 import 'package:robur_fit_x/main.dart';
 
 class DinamicFAB extends StatelessWidget {
@@ -48,10 +49,10 @@ class DinamicFAB extends StatelessWidget {
 
     switch (selectedPage) {
       case 0:
-        // ...
+        showAllTemplates(context);
         break;
       case 1:
-        // ...
+        showAllTemplates(context);
         break;
       case 2:
         workoutTemplateCreation(context);
