@@ -230,33 +230,83 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
                   margin: const EdgeInsets.only(bottom: 8),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            controller: exc['nameController'],
-                            focusNode: exc['focusNode'],
-                            decoration: InputDecoration(labelText: 'Exercise ${index + 1}'),
-                          ),
-                        ),
-                        const SizedBox(width: 16),
+                    child: Column(
+                      children:[
                         Row(
                           children: [
-                            IconButton(
-                              icon: const Icon(Icons.remove),
-                              onPressed: () => setState(() {
-                                if (exc['sets'] > 1) exc['sets']--;
-                              }),
-                            ),
-                            Text('${exc['sets']} Sets'),
-                            IconButton(
-                              icon: const Icon(Icons.add),
-                              onPressed: () => setState(() => exc['sets']++),
-                            ),
+                            Expanded(child: 
+                              TextField(
+                                controller: exc['nameController'],
+                                focusNode: exc['focusNode'],
+                                decoration: InputDecoration(labelText: 'Exercise ${index + 1}'),
+                              ),
+                              ),
+                          // Delete current exercise
+                                IconButton(
+                                  icon: const Icon(Icons.delete, color: Color.fromARGB(255, 185, 35, 35),),
+                                  onPressed: () => setState(() {
+                                    _exercises.removeAt(index);
+                                  }),
+                                ),
                           ],
-                        )
-                      ],
-                    ),
+                        ),
+                        const SizedBox(height: 16),
+                        
+                        // a row for each Set
+                        // ... expand the list into the Column
+                        ...List.generate(exc['sets'], (setIndex) {
+                          int reps = 1;
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: Row(
+                              children: [
+                                // Set number
+                                Expanded(
+                                  flex: 2,
+                                  child: Text('Set ${setIndex + 1}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                                ),
+                                const SizedBox(width: 8),
+                                
+                                // Weight input (Kg)
+                                Expanded(
+                                  flex: 3,
+                                  child: TextField(
+                                    decoration: const InputDecoration(
+                                      labelText: 'Weight (kg)',
+                                      border: OutlineInputBorder(),
+                                      isDense: true, // more compact text
+                                    ),
+                                    keyboardType: TextInputType.number,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                
+                                // Reps input (temporary)
+                                IconButton(
+                                  icon: const Icon(Icons.remove),
+                                  onPressed: () => setState(() {
+                                    if (reps > 1) reps--;
+                                  }),
+                                ),
+                                Text('${reps} Reps'),
+                                IconButton(
+                                  icon: const Icon(Icons.add),
+                                  onPressed: () => setState(() => reps++),
+                                ),
+                                
+                                // Delete current set
+                                IconButton(
+                                  icon: const Icon(Icons.delete, color: Color.fromARGB(255, 185, 35, 35),),
+                                  onPressed: () => setState(() {
+                                    if (exc['sets'] > 1) exc['sets']--;
+                                  }),
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
+                      ]
+                    )
                   ),
                 );
               }
@@ -269,18 +319,18 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Expanded(
-              child: FilledButton.icon(
+                child: FilledButton.icon(
                   onPressed: _addExercise,
                   icon: const Icon(Icons.add),
                   label: const Text('Add Exercise'),
-                  ),
+                ),
               ),
               const SizedBox(width: 16),
               Expanded(
-              child: FilledButton.icon(
-                onPressed: _saveSession,
-                icon: const Icon(Icons.save),
-                label: const Text('Save'),
+                child: FilledButton.icon(
+                  onPressed: _saveSession,
+                  icon: const Icon(Icons.save),
+                  label: const Text('Save'),
                 ),
               )
             ],
