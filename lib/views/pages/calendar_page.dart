@@ -45,7 +45,7 @@ class _CalendarPageState extends State<CalendarPage>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Workouts'),
+        title: const Text('My History'),
       ),
       // if empty list show message
       body: _session.isEmpty
