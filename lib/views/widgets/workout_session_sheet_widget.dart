@@ -77,9 +77,16 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
     if (widget.sessionToEdit != null) {
       _sessionWorkoutName.text = widget.sessionToEdit!.name;
       for (var exc in widget.sessionToEdit!.exercises) {
+        List<Map<String, dynamic>> _sets = [];
+        for (var s in exc.sets) {
+          _sets.add({
+            'weightController': TextEditingController(text: s.weight.toString()),
+            'reps': s.reps,
+          });
+        }
         _exercises.add({
           'nameController': TextEditingController(text: exc.name),
-          'sets': exc.sets.length,
+          'sets': _sets,
           'focusNode': FocusNode(),
         });
       }
@@ -88,9 +95,16 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
     else if (widget.baseTemplate != null) {
       _sessionWorkoutName.text = widget.baseTemplate!.name;
       for (var exc in widget.baseTemplate!.exercises) {
+        List<Map<String, dynamic>> _sets = [];
+        for (var s in exc.sets) {
+          _sets.add({
+            'weightController': TextEditingController(),
+            'reps': 1,
+          });
+        }
         _exercises.add({
           'nameController': TextEditingController(text: exc.name),
-          'sets': exc.sets.length,
+          'sets': _sets,
           'focusNode': FocusNode(),
         });
       }
@@ -103,7 +117,12 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
     setState(() {
       _exercises.add({
         'nameController': TextEditingController(),
-        'sets': 1,
+        'sets': [
+          {
+            'weightController': TextEditingController(),
+            'reps': 1,
+          }
+        ],
         'focusNode': newFocus,
       });
     });
@@ -133,9 +152,13 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
     List<Exercise> exercises = [];
     
     for (var exc in _exercises) {
-      // Default values (0 or current date)
-      List<WorkoutSet> sessionSet = List.generate(exc['sets'], (index) => WorkoutSet(reps: 0, weight: 0.0));
-      exercises.add(Exercise(name: exc['nameController'].text.trim(), groupMuscle: "", sets: sessionSet));
+      List<WorkoutSet> sessionSets = List.generate(exc['sets'].length, (index) {
+        var currentSet = exc['sets'][index];
+        double weightValue = double.tryParse(currentSet['weightController'].text.replaceAll(',', '.')) ?? 0.0;
+        
+        return WorkoutSet(reps: currentSet['reps'], weight: weightValue);
+      });
+      exercises.add(Exercise(name: exc['nameController'].text.trim(), groupMuscle: "", sets: sessionSets));
     }
     
     if (widget.sessionToEdit != null) {
@@ -196,6 +219,9 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
     for (var exc in _exercises) {
       exc['nameController'].dispose();
       exc['focusNode'].dispose();
+      for (var s in exc['sets']) {
+        s['weightController'].dispose();
+      }
     }
     super.dispose();
   }
@@ -254,8 +280,8 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
                         
                         // a row for each Set
                         // ... expand the list into the Column
-                        ...List.generate(exc['sets'], (setIndex) {
-                          int reps = 1;
+                        ...List.generate(exc['sets'].length, (setIndex) {
+                          var currentSet = exc['sets'][setIndex];
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 8.0),
                             child: Row(
@@ -271,6 +297,7 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
                                 Expanded(
                                   flex: 3,
                                   child: TextField(
+                                    controller: currentSet['weightController'],
                                     decoration: const InputDecoration(
                                       labelText: 'Weight (kg)',
                                       border: OutlineInputBorder(),
@@ -281,30 +308,41 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
                                 ),
                                 const SizedBox(width: 8),
                                 
-                                // Reps input (temporary)
+                                // Reps input
                                 IconButton(
                                   icon: const Icon(Icons.remove),
                                   onPressed: () => setState(() {
-                                    if (reps > 1) reps--;
+                                    if (currentSet['reps'] > 1) currentSet['reps']--;
                                   }),
                                 ),
-                                Text('${reps} Reps'),
+                                Text('${currentSet['reps']} Reps'),
                                 IconButton(
                                   icon: const Icon(Icons.add),
-                                  onPressed: () => setState(() => reps++),
+                                  onPressed: () => setState(() => currentSet['reps']++),
                                 ),
                                 
                                 // Delete current set
                                 IconButton(
                                   icon: const Icon(Icons.delete, color: Color.fromARGB(255, 185, 35, 35),),
                                   onPressed: () => setState(() {
-                                    if (exc['sets'] > 1) exc['sets']--;
+                                    if (exc['sets'].length > 1) exc['sets'].removeAt(setIndex);
                                   }),
                                 ),
                               ],
                             ),
                           );
                         }),
+                        
+                        TextButton.icon(
+                          onPressed: () => setState(() {
+                            exc['sets'].add({
+                              'weightController': TextEditingController(),
+                              'reps': 1,
+                            });
+                          }),
+                          icon: const Icon(Icons.add),
+                          label: const Text("Add Set"),
+                        ),
                       ]
                     )
                   ),
