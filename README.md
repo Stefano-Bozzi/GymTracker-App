@@ -6,28 +6,59 @@ _Fitness App to track your gym progress – Built with Flutter & Android Studio_
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-blue.svg)](https://flutter.dev/)
 [![Dart](https://img.shields.io/badge/Dart-3.x-blue.svg)](https://dart.dev/)
 [![Android Studio](https://img.shields.io/badge/Android%20Studio-Otter%202025.x-blue.svg)](https://developer.android.com/studio)
+[![Isar](https://img.shields.io/badge/Database-Isar-blue.svg)](https://isar.dev/)
 [![Status](https://img.shields.io/badge/status-active--development-yellow.svg)](https://github.com/Stefano-Bozzi/RoburFitX-App)
 
+**RoburFitX** is an offline-first smartphone application that helps users track their gym workouts, manage routines, and monitor their progress over time.
 
+### **Philosophy** 
+This project was born out of the need for a **free, minimalist,** and above all, **private** alternative to modern fitness apps. RoburFitX does not collect your personal data, requires no accounts, contains no ads, and expects no rewards in return.
 
-**RoburFitX** is an app developed for smartphones that helps users track their gym workouts and monitor their progress over time.
+### 🚧 **Status:** Active development (v0.1.0)
+The core architecture, local database management, and workout tracking flows are fully functional. Analytics and UI refinements are currently being built.
 
-### Core Features
-⚠️ Warning! Under development!
+---
 
-Future features will be:
-* Track sets, reps, and weight for each exercise.
-* View weight progression for each exercise through charts.
-* Create and save custom workout routines.
+## Current Features
+* **Workout Templates:** Create, edit, and manage custom workout routines with specific exercises.
+* **Session Tracking:** Start a new workout session instantly by choosing a pre-saved template.
+* **Granular Tracking:** Dynamically add, edit, or remove individual sets during a workout, recording both **Weight (kg)** and **Reps**.
+* **Workout History:** View a chronological list of all your completed workout sessions in the Calendar tab.
+* **100% Offline & Private:** All data is securely stored locally on your device. No cloud syncing, zero privacy risks.
 
+---
 
 ## Installation
 
-⚠️ Warning! Under development!
+### Download for Smartphone (Users)
+You can download and install the app directly on your device:
+
+* **Android:** Go to the [Releases page](https://github.com/Stefano-Bozzi/RoburFitX-App/releases), download the latest `.apk` file, and open it on your phone to install (you may need to allow installations from unknown sources in your settings).
+* **iOS:** Due to Apple's restrictions, direct installation is not currently available.
+
+### Build from Source (Developers)
+To test the application locally on your machine or emulator:
+
+1. Ensure you have [Flutter](https://docs.flutter.dev/get-started/install) installed.
+2. Clone the repository:
+    ```bash
+    git clone https://github.com/Stefano-Bozzi/RoburFitX-App.git
+    ```
+3. Navigate to the project directory and fetch the dependencies:
+    ```bash
+    cd RoburFitX-App
+    flutter pub get
+    ```
+4. Run the app on your connected device or emulator:
+    ```bash
+    flutter run
+    ```
 
 ## Usage Instructions
-
-⚠️ Warning! Under development!
+1. Navigate to the **Workouts** tab to create your first Workout Template. Add exercises and default sets.
+2. Navigate to the **Calendar** tab and tap the **+** (New Session) button.
+3. Select the template you just created.
+4. The app will generate a ready-to-use session: input your actual Weight and Reps for each set and hit **Save** to log your progress!
 
 ## History
 See the file [CHANGELOG.md](https://github.com/Stefano-Bozzi/RoburFitX-App/blob/master/CHANGELOG.md).
@@ -44,7 +75,6 @@ Please include a clear and detailed description of your changes or suggestions.
 The code is released under the MIT License. The MIT License is a permissive software license from the Massachusetts Institute of Technology that places very few restrictions on reuse. For more details and the complete license text, see the [LICENSE.md](./LICENSE.md) file.
 
 This project uses packages required for proper functionality, many of which are already included and automatically installed via Flutter and Android Studio. Third-party licenses have been grouped in the [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md) file.
-
 
 ## Author
 Developed by [Stefano-Bozzi](https://github.com/Stefano-Bozzi).
