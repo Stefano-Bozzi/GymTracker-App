@@ -2,9 +2,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 
-import 'package:robur_fit_x/data/workout.dart';
-import 'package:robur_fit_x/data/workout_template.dart';
-import 'package:robur_fit_x/main.dart';
+import 'package:gym_tracker/data/workout.dart';
+import 'package:gym_tracker/data/workout_template.dart';
+import 'package:gym_tracker/main.dart';
 
 part 'workout_isar.g.dart';
 

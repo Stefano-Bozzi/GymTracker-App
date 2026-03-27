@@ -3,14 +3,14 @@
 //________________________________________________________________
 
 import 'package:flutter/material.dart';
-import 'package:robur_fit_x/constants/constants.dart';
-import 'package:robur_fit_x/data/notifiers.dart';
-import 'package:robur_fit_x/views/pages/calendar_page.dart';
-import 'package:robur_fit_x/views/pages/home_page.dart';
-import 'package:robur_fit_x/views/pages/workout_page.dart';
-import 'package:robur_fit_x/views/widgets/appdrawer_widget.dart';
-import 'package:robur_fit_x/views/widgets/navbar_widget.dart';
-import 'package:robur_fit_x/views/widgets/dinamicfab_widget.dart';
+import 'package:gym_tracker/constants/constants.dart';
+import 'package:gym_tracker/data/notifiers.dart';
+import 'package:gym_tracker/views/pages/calendar_page.dart';
+import 'package:gym_tracker/views/pages/home_page.dart';
+import 'package:gym_tracker/views/pages/workout_page.dart';
+import 'package:gym_tracker/views/widgets/appdrawer_widget.dart';
+import 'package:gym_tracker/views/widgets/navbar_widget.dart';
+import 'package:gym_tracker/views/widgets/dinamicfab_widget.dart';
 
 List<Widget> pages= [
   // A list of all pages accessible from the NavBar.

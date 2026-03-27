@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;   // Import class to interact with system services
-import 'package:robur_fit_x/constants/constants.dart';
+import 'package:gym_tracker/constants/constants.dart';
 import 'package:markdown_widget/markdown_widget.dart';    // needed for Third Party Licenses display
 
 class LicensesPage extends StatelessWidget {              // define a class without a state

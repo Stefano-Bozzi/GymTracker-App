@@ -3,7 +3,7 @@
 //________________________________________________________________
 
 import 'package:flutter/material.dart';
-import 'package:robur_fit_x/data/notifiers.dart';
+import 'package:gym_tracker/data/notifiers.dart';
 
 class NavBarWidget extends StatelessWidget {
   const NavBarWidget({super.key});

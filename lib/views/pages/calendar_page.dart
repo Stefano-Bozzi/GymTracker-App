@@ -4,10 +4,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
-import 'package:robur_fit_x/main.dart';
-import 'package:robur_fit_x/data/notifiers.dart';
-import 'package:robur_fit_x/data/workout_isar.dart';
-import 'package:robur_fit_x/views/widgets/workout_session_sheet_widget.dart';
+import 'package:gym_tracker/main.dart';
+import 'package:gym_tracker/data/notifiers.dart';
+import 'package:gym_tracker/data/workout_isar.dart';
+import 'package:gym_tracker/views/widgets/workout_session_sheet_widget.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
