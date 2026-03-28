@@ -3,6 +3,7 @@ import 'package:gym_tracker/data/notifiers.dart';
 import 'package:gym_tracker/data/workout_isar.dart';
 import 'package:gym_tracker/data/workout_template.dart';
 import 'package:gym_tracker/main.dart';
+import 'package:gym_tracker/constants/constants.dart';
 
 /// Opens the BottomSheet to create a workout template.
 void workoutTemplateCreation(BuildContext context,{IsarTemplateWorkout? templateToEdit}) {
@@ -67,7 +68,7 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text("Attention", style: TextStyle(color: Colors.red)),
+        title: Text("Attention", style: TextStyle(color: AppColors.alert(context))),
         content: Text(message),
         actions: [
           TextButton(
@@ -126,7 +127,10 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
 
     // Successfully saving Message
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Workout Template Successfully Saved")),
+      const SnackBar(
+        content: Text("Workout Template Successfully Saved"),
+        duration: Duration(seconds: 1),
+      ),
     );
   }
 
@@ -201,7 +205,7 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
                             const SizedBox(width: 8),
                             // Delete exercise button
                                 IconButton(
-                              icon: const Icon(Icons.delete, color: Color.fromARGB(255, 185, 35, 35),),
+                              icon: Icon(Icons.delete, color: AppColors.alert(context),),
                                   onPressed: () => setState(() {
                                     _exercises.removeAt(index);
                                   }),
