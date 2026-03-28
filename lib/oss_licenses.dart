@@ -8,7 +8,7 @@
 // https://pub.dev/packages/dart_pubspec_licenses
 
 /// This package.
-const thisPackage = _robur_fit_x;
+const thisPackage = _gym_tracker;
 
 /// All dependencies including transitive dependencies.
 const allDependencies = <Package>[
@@ -4859,9 +4859,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
   );
 
-/// robur_fit_x 0.1.0+1
-const _robur_fit_x = Package(
-    name: 'robur_fit_x',
+/// gym_tracker 0.1.0+1
+const _gym_tracker = Package(
+    name: 'gym_tracker',
     description: 'A simple app to track gym progress and results, developed with Flutter and Android Studio.',
     authors: [],
     version: '0.1.0+1',

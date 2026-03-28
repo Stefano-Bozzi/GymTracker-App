@@ -1,4 +1,4 @@
-name: robur_fit_x
+name: gym_tracker
 description: "A simple app to track gym progress and results, developed with Flutter and Android Studio."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.

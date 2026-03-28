@@ -1,4 +1,4 @@
-import 'package:robur_fit_x/data/workout_isar.dart';
+import 'package:gym_tracker/data/workout_isar.dart';
 import 'package:isar/isar.dart';
 
 class WorkoutSet {

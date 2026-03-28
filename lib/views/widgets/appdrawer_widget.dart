@@ -3,7 +3,7 @@
 //________________________________________________________________
 
 import 'package:flutter/material.dart';
-import 'package:robur_fit_x/views/pages/licenses_page.dart';
+import 'package:gym_tracker/views/pages/licenses_page.dart';
 
 class AppDrawerWidget extends StatelessWidget {
   const AppDrawerWidget({super.key});

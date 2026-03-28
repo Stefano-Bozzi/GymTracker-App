@@ -6,7 +6,7 @@
 import 'package:flutter/material.dart';  // Import Flutter Material library for UI widgets and themes                                                          // rootBundel is needet to have access to "-access" files
 
 // App Title
-const String appName = "RoburFitX";
+const String appName = "GymTracker";
 
 
 // Define Colors for Light and Dark mode

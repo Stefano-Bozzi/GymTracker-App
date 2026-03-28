@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:robur_fit_x/data/notifiers.dart';
-import 'package:robur_fit_x/data/workout_isar.dart';
-import 'package:robur_fit_x/data/workout_template.dart';
-import 'package:robur_fit_x/main.dart';
+import 'package:gym_tracker/data/notifiers.dart';
+import 'package:gym_tracker/data/workout_isar.dart';
+import 'package:gym_tracker/data/workout_template.dart';
+import 'package:gym_tracker/main.dart';
 
 /// Opens the BottomSheet to create a workout template.
 void workoutTemplateCreation(BuildContext context,{IsarTemplateWorkout? templateToEdit}) {

@@ -1,18 +1,18 @@
-# RoburFitX
+# GymTracker
 _Fitness App to track your gym progress – Built with Flutter & Android Studio_
 
-[![GitHub Release](https://img.shields.io/github/v/release/Stefano-Bozzi/RoburFitX-App)](https://github.com/Stefano-Bozzi/RoburFitX-App/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/Stefano-Bozzi/RoburFitX-App/blob/master/LICENSE.md)
+[![GitHub Release](https://img.shields.io/github/v/release/Stefano-Bozzi/GymTracker-App)](https://github.com/Stefano-Bozzi/GymTracker-App/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/Stefano-Bozzi/GymTracker-App/blob/master/LICENSE.md)
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-blue.svg)](https://flutter.dev/)
 [![Dart](https://img.shields.io/badge/Dart-3.x-blue.svg)](https://dart.dev/)
 [![Android Studio](https://img.shields.io/badge/Android%20Studio-Otter%202025.x-blue.svg)](https://developer.android.com/studio)
 [![Isar](https://img.shields.io/badge/Database-Isar-blue.svg)](https://isar.dev/)
-[![Status](https://img.shields.io/badge/status-active--development-yellow.svg)](https://github.com/Stefano-Bozzi/RoburFitX-App)
+[![Status](https://img.shields.io/badge/status-active--development-yellow.svg)](https://github.com/Stefano-Bozzi/GymTracker-App)
 
-**RoburFitX** is an offline-first smartphone application that helps users track their gym workouts, manage routines, and monitor their progress over time.
+**GymTracker** is an offline-first smartphone application that helps users track their gym workouts, manage routines, and monitor their progress over time.
 
 ### **Philosophy** 
-This project was born out of the need for a **free, minimalist,** and above all, **private** alternative to modern fitness apps. RoburFitX does not collect your personal data, requires no accounts, contains no ads, and expects no rewards in return.
+This project was born out of the need for a **free, minimalist,** and above all, **private** alternative to modern fitness apps. GymTracker does not collect your personal data, requires no accounts, contains no ads, and expects no rewards in return.
 
 ### 🚧 **Status:** Active development (v0.1.0)
 The core architecture, local database management, and workout tracking flows are fully functional. Analytics and UI refinements are currently being built.
@@ -33,7 +33,7 @@ The core architecture, local database management, and workout tracking flows are
 ### Download for Smartphone (Users)
 You can download and install the app directly on your device:
 
-* **Android:** Go to the [Releases page](https://github.com/Stefano-Bozzi/RoburFitX-App/releases), download the latest `.apk` file, and open it on your phone to install (you may need to allow installations from unknown sources in your settings).
+* **Android:** Go to the [Releases page](https://github.com/Stefano-Bozzi/GymTracker-App/releases), download the latest `.apk` file, and open it on your phone to install (you may need to allow installations from unknown sources in your settings).
 * **iOS:** Due to Apple's restrictions, direct installation is not currently available.
 
 ### Build from Source (Developers)
@@ -42,11 +42,11 @@ To test the application locally on your machine or emulator:
 1. Ensure you have [Flutter](https://docs.flutter.dev/get-started/install) installed.
 2. Clone the repository:
     ```bash
-    git clone https://github.com/Stefano-Bozzi/RoburFitX-App.git
+    git clone https://github.com/Stefano-Bozzi/GymTracker-App.git
     ```
 3. Navigate to the project directory and fetch the dependencies:
     ```bash
-    cd RoburFitX-App
+    cd GymTracker-App
     flutter pub get
     ```
 4. Run the app on your connected device or emulator:
@@ -61,7 +61,7 @@ To test the application locally on your machine or emulator:
 4. The app will generate a ready-to-use session: input your actual Weight and Reps for each set and hit **Save** to log your progress!
 
 ## History
-See the file [CHANGELOG.md](https://github.com/Stefano-Bozzi/RoburFitX-App/blob/master/CHANGELOG.md).
+See the file [CHANGELOG.md](https://github.com/Stefano-Bozzi/GymTracker-App/blob/master/CHANGELOG.md).
 
 ## Contributing
 
