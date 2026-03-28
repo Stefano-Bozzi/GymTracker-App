@@ -139,7 +139,7 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
       }
     }
   }
-  
+
   /// Function to pass data to fill field with past data as decoration and calculate statistics comparison
   Future<void> _loadPastDataAsync() async{
     // if the current session is in modify mode i need to exclude current session from search in past statistics.
@@ -188,6 +188,8 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
           {
             'weightController': TextEditingController(),
             'reps': 1,
+            'hintWeight':'Weight (kg)',
+            'pastE1RM':null,
           }
         ],
         'focusNode': newFocus,
@@ -358,14 +360,14 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
                                   flex: 2,
                                   child: Text('Set ${setIndex + 1}', style: const TextStyle(fontWeight: FontWeight.bold)),
                                 ),
-                                const SizedBox(width: 8),
                                 
                                 // Weight input (Kg)
                                 Expanded(
                                   flex: 3,
                                   child: TextField(
                                     controller: currentSet['weightController'],
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
+                                      hintText: currentSet['hintWeight'],
                                       labelText: 'Weight (kg)',
                                       border: OutlineInputBorder(),
                                       isDense: true, // more compact text
