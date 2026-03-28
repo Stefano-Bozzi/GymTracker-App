@@ -76,5 +76,10 @@ The code is released under the MIT License. The MIT License is a permissive soft
 
 This project uses packages required for proper functionality, many of which are already included and automatically installed via Flutter and Android Studio. Third-party licenses have been grouped in the [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md) file.
 
+## Credits
+The application logo utilize the **Bruno Ace SC** font:
+* **Source:** [Google Fonts - Bruno Ace SC](https://fonts.google.com/specimen/Bruno+Ace+SC)
+* **License:** SIL Open Font License, Version 1.1
+
 ## Author
 Developed by [Stefano-Bozzi](https://github.com/Stefano-Bozzi).
