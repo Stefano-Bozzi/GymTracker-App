@@ -104,6 +104,8 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
           _sets.add({
             'weightController': TextEditingController(text: s.weight.toString()),
             'reps': s.reps,
+            'hintWeight' : 'Weight (kg)',
+            'pastE1RM': null,
           });
         }
         _exercises.add({
@@ -122,6 +124,8 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
           _sets.add({
             'weightController': TextEditingController(),
             'reps': 1,
+            'hintWeight' : 'Weight (kg)',
+            'pastE1RM': null,
           });
         }
         _exercises.add({
