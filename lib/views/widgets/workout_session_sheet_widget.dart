@@ -94,7 +94,9 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
   @override
   void initState() {
     super.initState();
-    
+    _initDataSync();
+  }
+  void _initDataSync(){
     // A. if modify an existing session
     if (widget.sessionToEdit != null) {
       _sessionWorkoutName.text = widget.sessionToEdit!.name;
