@@ -95,6 +95,7 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
   void initState() {
     super.initState();
     _initDataSync();
+    _loadPastDataAsync();
   }
   void _initDataSync(){
     // A. if modify an existing session
@@ -138,6 +139,44 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
       }
     }
   }
+  
+  /// Function to pass data to fill field with past data as decoration and calculate statistics comparison
+  Future<void> _loadPastDataAsync() async{
+    // if the current session is in modify mode i need to exclude current session from search in past statistics.
+    int? excludeId = widget.sessionToEdit?.id;
+
+    for (var exc in _exercises) {
+      String excName = exc['nameController'].text;
+      if (excName.isEmpty) continue;
+
+      // If this exercise has a name find a past one
+      IsarExercise? pastExc = await getLastExercise(excName, excludeId);
+
+      if (pastExc != null && mounted) { //here mounted is a default bool var existing because this current
+                                        // class is created expandig State (base class for stateful widget)
+                                        // it says if the widget is on screen.
+
+        //alert on graphics
+        setState(() {
+          var sets = exc['sets'] as List<Map<String, dynamic>>;
+
+          // here the logic: if the user create from template insert past reps and hint weight,
+          // if the user modify session insert only hint weight (visible only if deleted all text in weight field)
+          for (int i =0; i < sets.length; i++){
+            if (i < pastExc.sets.length){
+              IsarWorkoutSet pastSet = pastExc.sets[i];
+              sets[i]['hintWeight'] = '${pastSet.weight} kg';
+              sets[i]['pastE1RM'] = pastSet.e1RM;
+              if (widget.sessionToEdit != null){
+                sets[i]['reps'] = pastSet.reps;
+              }
+            }
+          }
+        });
+      }
+    }
+  }
+
 
   /// function to add a new exercise
   void _addExercise() {
