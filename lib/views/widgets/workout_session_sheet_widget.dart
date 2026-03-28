@@ -5,6 +5,28 @@ import 'package:gym_tracker/data/workout.dart';
 import 'package:gym_tracker/main.dart';
 import 'package:isar_community/isar.dart';
 
+
+/// Check for past same exercise to make comparison
+Future<IsarExercise?> getLastExercise(String name, [int? currentWorkoutId]) async {
+  // Build the base query searching for the specific exercise name
+  var filterQuery = isar.isarWorkouts.filter().exercisesElement((q) => q.nameEqualTo(name));
+  
+  // If we are editing an existing session, we must EXCLUDE it from the search
+  if (currentWorkoutId != null) {
+    filterQuery = (filterQuery.idLessThan(currentWorkoutId));
+  }
+
+  // Get the most recent one
+  final workout = await filterQuery.sortByDateDesc().findFirst();
+
+  if (workout == null) {
+    return null;
+  } else {
+    return workout.exercises.firstWhere((e) => e.name == name);
+  }
+}
+
+
 /// Show a list of all templates to start a new session
 void showAllTemplates(BuildContext context) async {
   final templates = await isar.isarTemplateWorkouts.where().findAll();
