@@ -3,7 +3,7 @@ import 'package:gym_tracker/data/notifiers.dart';
 import 'package:gym_tracker/data/workout_isar.dart';
 import 'package:gym_tracker/data/workout.dart';
 import 'package:gym_tracker/main.dart';
-import 'package:isar/isar.dart';
+import 'package:isar_community/isar.dart';
 
 /// Show a list of all templates to start a new session
 void showAllTemplates(BuildContext context) async {
