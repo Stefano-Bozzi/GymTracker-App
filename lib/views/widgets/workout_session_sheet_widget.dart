@@ -167,7 +167,7 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
               IsarWorkoutSet pastSet = pastExc.sets[i];
               sets[i]['hintWeight'] = '${pastSet.weight} kg';
               sets[i]['pastE1RM'] = pastSet.e1RM;
-              if (widget.sessionToEdit != null){
+              if (widget.sessionToEdit == null){
                 sets[i]['reps'] = pastSet.reps;
               }
             }
