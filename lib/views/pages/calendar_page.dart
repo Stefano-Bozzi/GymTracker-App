@@ -72,7 +72,7 @@ class _CalendarPageState extends State<CalendarPage>{
                           children: [
                             IconButton(
                               icon: const Icon(Icons.delete, color: Color.fromARGB(255, 185, 35, 35),),
-                              onPressed: () => deleteIsarElement(isar, isar.isarWorkouts, session.id, refreshWorkoutPageNotifier, context)
+                              onPressed: () => deleteIsarElement(isar, isar.isarWorkouts, session.id, refreshCalendarPageNotifier, context)
                             ),
                               const SizedBox(width: 16),
                             IconButton(
