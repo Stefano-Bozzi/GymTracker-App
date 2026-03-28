@@ -6,7 +6,7 @@ _Fitness App to track your gym progress – Built with Flutter & Android Studio_
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-blue.svg)](https://flutter.dev/)
 [![Dart](https://img.shields.io/badge/Dart-3.x-blue.svg)](https://dart.dev/)
 [![Android Studio](https://img.shields.io/badge/Android%20Studio-Otter%202025.x-blue.svg)](https://developer.android.com/studio)
-[![Isar](https://img.shields.io/badge/Database-Isar-blue.svg)](https://isar.dev/)
+[![Isar](https://img.shields.io/badge/Database-Isar--Community-purple)](https://isar-community.dev/)
 [![Status](https://img.shields.io/badge/status-active--development-yellow.svg)](https://github.com/Stefano-Bozzi/GymTracker-App)
 
 **GymTracker** is an offline-first smartphone application that helps users track their gym workouts, manage routines, and monitor their progress over time.
@@ -17,7 +17,38 @@ This project was born out of the need for a **free, minimalist,** and above all,
 ### 🚧 **Status:** Active development (v0.1.0)
 The core architecture, local database management, and workout tracking flows are fully functional. Analytics and UI refinements are currently being built.
 
----
+### App Overview
+
+
+<table width="100%" align="center">
+  <tr>
+    <td width="16.6%" align="center">
+      <img src="assets/readme/1.png" width="100%" style="border: 1px solid #ddd; border-radius: 10px;"><br><br><b>1. Home<br>Tab</b>
+    </td>
+    <td width="16.6%" align="center">
+      <img src="assets/readme/2.png" width="100%" style="border: 1px solid #ddd; border-radius: 10px;"><br><br><b>2. Workouts<br>Tab</b>
+    </td>
+    <td width="16.6%" align="center">
+      <img src="assets/readme/3.png" width="100%" style="border: 1px solid #ddd; border-radius: 10px;"><br><br><b>3. Create<br>Template</b>
+    </td>
+    <td width="16.6%" align="center">
+      <img src="assets/readme/4.png" width="100%" style="border: 1px solid #ddd; border-radius: 10px;"><br><br><b>4. Calendar<br>Tab</b>
+    </td>
+    <td width="16.6%" align="center">
+      <img src="assets/readme/5.png" width="100%" style="border: 1px solid #ddd; border-radius: 10px;"><br><br><b>5. Start<br>Session</b>
+    </td>
+    <td width="16.6%" align="center">
+      <img src="assets/readme/6.png" width="100%" style="border: 1px solid #ddd; border-radius: 10px;"><br><br><b>6. Track<br>Session</b>
+    </td>
+  </tr>
+</table>
+
+1. **Home Page:** The app's core philosophy—private, local, and offline.
+2. **Workouts Tab:** Manage and view your custom workout templates.
+3. **Create Template:** Build a new routine by adding exercises and default sets.
+4. **Calendar Tab (My History):** View your chronological history of completed sessions.
+5. **Start Session:** Select a pre-saved template to begin your daily workout.
+6. **Track Session:** Log your actual weight and reps in real-time.
 
 ## Current Features
 * **Workout Templates:** Create, edit, and manage custom workout routines with specific exercises.
@@ -29,6 +60,8 @@ The core architecture, local database management, and workout tracking flows are
 ---
 
 ## Installation
+
+⚠️ **Disclaimer: IT IS YOUR CHOICE TO PROCEED.** By downloading and installing this application outside of official App Stores, you assume all responsibilities. I do not provide technical support for device configurations, sideloading issues, or OS restrictions.
 
 ### Download for Smartphone (Users)
 You can download and install the app directly on your device:
