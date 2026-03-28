@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';                   // Imports the Flutter Material library for UI widgets and themes.
 import 'package:gym_tracker/views/widget_tree.dart';      // Imports the primary Widget that defines the application structure (Scaffold, Navigation).
 import 'package:gym_tracker/constants/constants.dart';    // Imports global constants like the app name and theme definitions.
-import 'package:isar/isar.dart';
+import 'package:isar_community/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:gym_tracker/data/workout_isar.dart';
 

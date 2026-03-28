@@ -3,7 +3,7 @@
 //________________________________________________________________
 
 import 'package:gym_tracker/data/workout_isar.dart';
-import 'package:isar/isar.dart';
+import 'package:isar_community/isar.dart';
 
 class TemplateSet {
   final int? reps;
