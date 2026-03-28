@@ -1,4 +1,4 @@
-package com.stefano.gymtracker
+package com.stefano.gym_tracker
 
 import io.flutter.embedding.android.FlutterActivity
 

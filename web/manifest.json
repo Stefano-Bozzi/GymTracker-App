@@ -1,11 +1,11 @@
 {
-    "name": "RoburFitX",
-    "short_name": "RoburFitX",
+    "name": "gym_tracker",
+    "short_name": "gym_tracker",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A simple app to track gym progress and results, developed with Flutter and Android Studio.",
+    "description": "A new Flutter project.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
