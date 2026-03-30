@@ -25,7 +25,7 @@ environment:
 
 
 # isar version
-isar_version: &isar_version 3.3.2 # define the version to be used
+# isar_version: &isar_version 3.3.2 # define the version to be used
 
 # ----------------------------PACKAGES AND VERSIONS ----------------------------
 
@@ -43,9 +43,11 @@ dependencies:
 
   # Create and manage workout data with a database structure
   isar_community: 
-    version: *isar_version
+    version: 3.3.2 
+    # version: *isar_version
   isar_community_flutter_libs: # contains Isar Core
-    version: *isar_version
+    version: 3.3.2 
+    # version: *isar_version
   # manage path
   path_provider: ^2.1.5
 
@@ -59,12 +61,16 @@ dev_dependencies:
   rename: ^3.1.0
 
   isar_community_generator: 
-    version: *isar_version
+    version: 3.3.2
+    # version: *isar_version
 
   build_runner: ^2.4.13
 
 # to create automatically all icons
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.4
+
+# to create starting logo when opening the app
+  flutter_native_splash: ^2.4.0
 
 # ---------------------------- FLUTTER PACKAGES ----------------------------
 flutter:
@@ -99,6 +105,30 @@ flutter:
 flutter_launcher_icons:
   android: true
   ios: true
-  # base logo
-  image_path: "assets/icons/logo_total_light.png"
-  min_sdk_android: 21
+  # base ikimage for old devices
+  image_path: "assets/icons/logo_total_light.png" 
+  
+  # --- ADAPTIVE (Android) ---
+  # Light theme
+  adaptive_icon_background: "assets/icons/logo_bkg_light.png"
+  adaptive_icon_foreground: "assets/icons/logo_subject_light.png"
+  
+  # Dark theme (Android 13+ and theme-icons)
+  monochrome_white_icon: "assets/icons/logo_subject_dark.png"
+
+flutter_native_splash:
+  # --- LIGHT THEME ---
+  color: "#FFFFFF" # bkg color
+  image: "assets/icons/logo_subject_light.png"
+  
+  # --- DARK THEME ---
+  color_dark: "#000000" # bkg color
+  image_dark: "assets/icons/logo_subject_dark.png"
+  fullscreen: false
+
+  # extra options for centering
+  android_12:
+    image: "assets/icons/logo_subject_light.png"
+    icon_background_color: "#FFFFFF"
+    image_dark: "assets/icons/logo_subject_dark.png"
+    icon_background_color_dark: "#000000"
