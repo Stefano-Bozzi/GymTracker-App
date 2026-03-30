@@ -17,6 +17,15 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 // global var to sign in to database into app
 late Isar isar;
 
+/// function to initialize the logic before the app starts
+Future<void> _initializeDatabase() async {
+  final dir = await getApplicationDocumentsDirectory();
+  isar = await Isar.open(
+    [IsarWorkoutSchema, IsarTemplateWorkoutSchema],
+    directory: dir.path,
+  );
+}
+
 //----------------------------------------------------------------
 // RUN THE APP
 //----------------------------------------------------------------
@@ -28,13 +37,14 @@ void main() async{
   // Screen show splash page
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  final dir = await getApplicationDocumentsDirectory();
-  isar = await Isar.open(
-    [IsarWorkoutSchema, IsarTemplateWorkoutSchema],
-    directory: dir.path,
-  );
+  // logic Setup
+  // whait for all process are completed before exiting
+  await Future.wait([
+  _initializeDatabase(),
+    Future.delayed(const Duration(seconds: 1)), // min timer to show splash start page avoiding too fast cases.
+  ]);
 
-  runApp(const MyApp()); // Launches the Flutter application.
+  runApp(const MyApp()); // Launches the Flutter application, style setup.
 
   // Close Slash page when finished drawing first app page
   WidgetsBinding.instance.addPostFrameCallback((_) {
