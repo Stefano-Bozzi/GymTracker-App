@@ -4,6 +4,7 @@
 - **Breaking change:** Added `hintWeight` and `pastE1RM` to state map. The internal `_exercises` state was updated to support historical data tracking.
 
 ---
+- *New Feature*: Add adaptive icons and splash-screen (see[this commit](https://github.com/Stefano-Bozzi/GymTracker-App/commit/ce0f11f4d9f0ea9c24a7b6db3a7edc7124bb5bf3)).
 - *Fix*: calendar refresh issue after session deletion (see [this commit](https://github.com/Stefano-Bozzi/GymTracker-App/commit/b0a311c3e488ce3ec688fff123d17db7edbc82ef)).
 - *New Feature*: Implement dynamic progress state tracking (e1RM) [#7](https://github.com/Stefano-Bozzi/GymTracker-App/pull/7)
     - *New Feature*: Historical Data Auto-fill. The app now fetches your last performance for an exercise, pre-filling past repetitions and displaying the previously lifted weight as a grey placeholder (`hintText`).
