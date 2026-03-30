@@ -12,6 +12,7 @@ import 'package:gym_tracker/constants/constants.dart';    // Imports global cons
 import 'package:isar_community/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:gym_tracker/data/workout_isar.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 // global var to sign in to database into app
 late Isar isar;
@@ -22,8 +23,11 @@ late Isar isar;
 
 void main() async{
 
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   // Database initialization
+  // Screen show splash page
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
   final dir = await getApplicationDocumentsDirectory();
   isar = await Isar.open(
     [IsarWorkoutSchema, IsarTemplateWorkoutSchema],
@@ -31,6 +35,11 @@ void main() async{
   );
 
   runApp(const MyApp()); // Launches the Flutter application.
+
+  // Close Slash page when finished drawing first app page
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    FlutterNativeSplash.remove();
+  });
 }
 
 //----------------------------------------------------------------
