@@ -33,3 +33,25 @@ final darkScheme = ColorScheme(
   surface: Color(0xFF121212),
   onSurface: Colors.white,
 );
+
+class AppColors {
+  static Color progressUp(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.greenAccent
+          : Colors.green;
+
+  static Color progressDown(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.orangeAccent
+          : Colors.orange;
+
+  static Color progressEqual(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.blueAccent
+          : Colors.blue;
+
+  static Color alert(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.redAccent
+          : Colors.red.shade900;
+}

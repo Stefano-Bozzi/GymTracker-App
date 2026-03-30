@@ -38,7 +38,7 @@ The core architecture, local database management, and workout tracking flows are
       <img src="assets/readme/5.png" width="100%" style="border: 1px solid #ddd; border-radius: 10px;"><br><br><b>5. Start<br>Session</b>
     </td>
     <td width="16.6%" align="center">
-      <img src="assets/readme/6.png" width="100%" style="border: 1px solid #ddd; border-radius: 10px;"><br><br><b>6. Track<br>Session</b>
+      <img src="assets/readme/6_video.gif" width="100%" style="border: 1px solid #ddd; border-radius: 10px;"><br><br><b>6. Track<br>Session</b>
     </td>
   </tr>
 </table>
@@ -48,14 +48,16 @@ The core architecture, local database management, and workout tracking flows are
 3. **Create Template:** Build a new routine by adding exercises and default sets.
 4. **Calendar Tab (My History):** View your chronological history of completed sessions.
 5. **Start Session:** Select a pre-saved template to begin your daily workout.
-6. **Track Session:** Log your actual weight and reps in real-time.
+6. **Live Tracking:** Log your actual weight and reps, with dynamic e1RM trend arrows guiding your progress.
 
 ## Current Features
 * **Workout Templates:** Create, edit, and manage custom workout routines with specific exercises.
-* **Session Tracking:** Start a new workout session instantly by choosing a pre-saved template.
-* **Granular Tracking:** Dynamically add, edit, or remove individual sets during a workout, recording both **Weight (kg)** and **Reps**.
+* **Smart Session Tracking:** Start a new workout session instantly by choosing a pre-saved template.
+The app automatically fetches your last performance for each exercise, showing previous weights as convenient grey placeholders.
+* **Real-Time e1RM Trends:** As you type your weight and reps, the app instantly calculates your estimated 1-Rep Max, displaying dynamic arrows (Green Up, Orange Down, Blue Equal) to visualize your progressive overload in real-time.
+* **Granular Control:** Dynamically add, edit, or remove individual sets during a workout, recording both **Weight (kg)** and **Reps** with interactive UI elements.
 * **Workout History:** View a chronological list of all your completed workout sessions in the Calendar tab.
-* **100% Offline & Private:** All data is securely stored locally on your device. No cloud syncing, zero privacy risks.
+* **100% Offline & Private:** All data is securely stored locally on your device via the Isar Database (thanks to [Isar Community](https://pub.dev/packages/isar_community)). No cloud syncing, zero privacy risks.
 
 ---
 
@@ -89,9 +91,10 @@ To test the application locally on your machine or emulator:
 
 ## Usage Instructions
 1. Navigate to the **Workouts** tab to create your first Workout Template. Add exercises and default sets.
-2. Navigate to the **Calendar** tab and tap the **+** (New Session) button.
+2. Navigate to the **Calendar** (or Home) tab and tap the **FAB** (New Session) button.
 3. Select the template you just created.
-4. The app will generate a ready-to-use session: input your actual Weight and Reps for each set and hit **Save** to log your progress!
+4. The app will generate a ready-to-use session. For exercises you've done before, your previous weight will appear as a grey hint. 
+5. Input your actual Weight and Reps for each set, watch the trend arrows adapt in real-time, and hit **Save** to log your progress!
 
 ## History
 See the file [CHANGELOG.md](https://github.com/Stefano-Bozzi/GymTracker-App/blob/master/CHANGELOG.md).

@@ -1,5 +1,18 @@
 ## HEAD
 
+## Breaking changes summary
+- **Breaking change:** Added `hintWeight` and `pastE1RM` to state map. The internal `_exercises` state was updated to support historical data tracking.
+
+---
+- *Fix*: calendar refresh issue after session deletion (see [this commit](https://github.com/Stefano-Bozzi/GymTracker-App/pull/7/changes/b0a311c3e488ce3ec688fff123d17db7edbc82ef)).
+- *New Feature*: Implement dynamic progress state tracking (e1RM) [#7](https://github.com/Stefano-Bozzi/GymTracker-App/pull/7)
+    - *New Feature*: Historical Data Auto-fill. The app now fetches your last performance for an exercise, pre-filling past repetitions and displaying the previously lifted weight as a grey placeholder (`hintText`).
+    - *New Feature*: Real-Time e1RM Trends and Dynamic Progress Arrows. The app calculates Estimated One-Repetition Maximum (e1RM) and compares it to previous sessions, providing live visual feedback (Green Up, Red Down, Grey Dash) while typing.
+    - *New Feature*: Asynchronous fetching of past data to prevent UI blocking when opening new sessions.
+    - Refactoring: Added fields to set for hint and pastE1RM to prepare state for historical tracking.
+
+---
+
 # Version 0.1.0 (Initial Release)
 
 - *Fix*: Passed to Isar-Community fork to resolve compatibility issue.
