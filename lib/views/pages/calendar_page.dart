@@ -8,6 +8,7 @@ import 'package:gym_tracker/main.dart';
 import 'package:gym_tracker/data/notifiers.dart';
 import 'package:gym_tracker/data/workout_isar.dart';
 import 'package:gym_tracker/views/widgets/workout_session_sheet_widget.dart';
+import 'package:gym_tracker/constants/constants.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
@@ -71,7 +72,7 @@ class _CalendarPageState extends State<CalendarPage>{
                         Row(
                           children: [
                             IconButton(
-                              icon: const Icon(Icons.delete, color: Color.fromARGB(255, 185, 35, 35),),
+                              icon: Icon(Icons.delete, color: AppColors.alert(context),),
                               onPressed: () => deleteIsarElement(isar, isar.isarWorkouts, session.id, refreshCalendarPageNotifier, context)
                             ),
                               const SizedBox(width: 16),

@@ -121,7 +121,10 @@ Future<void> deleteIsarElement<T>(
   // Feedback message
   if (context.mounted) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Succesfully Deleted")),
+      const SnackBar(
+        content: Text("Succesfully Deleted"),
+        duration: Duration(seconds: 1),
+      ),
     );
   }
 } 

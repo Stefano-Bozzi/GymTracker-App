@@ -8,6 +8,7 @@ import 'package:gym_tracker/main.dart';
 import 'package:gym_tracker/data/notifiers.dart';
 import 'package:gym_tracker/data/workout_isar.dart';
 import 'package:gym_tracker/views/widgets/workout_template_sheet_widget.dart';
+import 'package:gym_tracker/constants/constants.dart';
 
 class WorkoutPage extends StatefulWidget {
   const WorkoutPage({super.key});
@@ -71,7 +72,7 @@ class _WorkoutPageState extends State<WorkoutPage>{
                         Row(
                           children: [
                             IconButton(
-                              icon: const Icon(Icons.delete, color: Color.fromARGB(255, 185, 35, 35),),
+                              icon: Icon(Icons.delete, color: AppColors.alert(context),),
                               onPressed: () => deleteIsarElement(isar, isar.isarTemplateWorkouts, template.id, refreshWorkoutPageNotifier, context)
                             ),
                               const SizedBox(width: 16),

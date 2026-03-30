@@ -4,6 +4,29 @@ import 'package:gym_tracker/data/workout_isar.dart';
 import 'package:gym_tracker/data/workout.dart';
 import 'package:gym_tracker/main.dart';
 import 'package:isar_community/isar.dart';
+import 'package:gym_tracker/constants/constants.dart';
+
+
+/// Check for past same exercise to make comparison
+Future<IsarExercise?> getLastExercise(String name, [int? currentWorkoutId]) async {
+  // Build the base query searching for the specific exercise name
+  var filterQuery = isar.isarWorkouts.filter().exercisesElement((q) => q.nameEqualTo(name));
+  
+  // If we are editing an existing session, we must EXCLUDE it from the search
+  if (currentWorkoutId != null) {
+    filterQuery = (filterQuery.idLessThan(currentWorkoutId));
+  }
+
+  // Get the most recent one
+  final workout = await filterQuery.sortByDateDesc().findFirst();
+
+  if (workout == null) {
+    return null;
+  } else {
+    return workout.exercises.firstWhere((e) => e.name == name);
+  }
+}
+
 
 /// Show a list of all templates to start a new session
 void showAllTemplates(BuildContext context) async {
@@ -72,7 +95,10 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
   @override
   void initState() {
     super.initState();
-    
+    _initDataSync();
+    _loadPastDataAsync();
+  }
+  void _initDataSync(){
     // A. if modify an existing session
     if (widget.sessionToEdit != null) {
       _sessionWorkoutName.text = widget.sessionToEdit!.name;
@@ -82,6 +108,8 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
           _sets.add({
             'weightController': TextEditingController(text: s.weight.toString()),
             'reps': s.reps,
+            'hintWeight' : 'Weight (kg)',
+            'pastE1RM': null,
           });
         }
         _exercises.add({
@@ -100,6 +128,8 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
           _sets.add({
             'weightController': TextEditingController(),
             'reps': 1,
+            'hintWeight' : 'Weight (kg)',
+            'pastE1RM': null,
           });
         }
         _exercises.add({
@@ -111,6 +141,44 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
     }
   }
 
+  /// Function to pass data to fill field with past data as decoration and calculate statistics comparison
+  Future<void> _loadPastDataAsync() async{
+    // if the current session is in modify mode i need to exclude current session from search in past statistics.
+    int? excludeId = widget.sessionToEdit?.id;
+
+    for (var exc in _exercises) {
+      String excName = exc['nameController'].text;
+      if (excName.isEmpty) continue;
+
+      // If this exercise has a name find a past one
+      IsarExercise? pastExc = await getLastExercise(excName, excludeId);
+
+      if (pastExc != null && mounted) { //here mounted is a default bool var existing because this current
+                                        // class is created expandig State (base class for stateful widget)
+                                        // it says if the widget is on screen.
+
+        //alert on graphics
+        setState(() {
+          var sets = exc['sets'] as List<Map<String, dynamic>>;
+
+          // here the logic: if the user create from template insert past reps and hint weight,
+          // if the user modify session insert only hint weight (visible only if deleted all text in weight field)
+          for (int i =0; i < sets.length; i++){
+            if (i < pastExc.sets.length){
+              IsarWorkoutSet pastSet = pastExc.sets[i];
+              sets[i]['hintWeight'] = '${pastSet.weight} kg';
+              sets[i]['pastE1RM'] = pastSet.e1RM;
+              if (widget.sessionToEdit == null){
+                sets[i]['reps'] = pastSet.reps;
+              }
+            }
+          }
+        });
+      }
+    }
+  }
+
+
   /// function to add a new exercise
   void _addExercise() {
     final newFocus = FocusNode(); 
@@ -121,6 +189,8 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
           {
             'weightController': TextEditingController(),
             'reps': 1,
+            'hintWeight':'Weight (kg)',
+            'pastE1RM':null,
           }
         ],
         'focusNode': newFocus,
@@ -209,7 +279,10 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
     Navigator.pop(context);
 
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Workout Session Successfully Saved")),
+      const SnackBar(
+        content: Text("Workout Session Successfully Saved"),
+        duration: Duration(seconds: 1),
+    ),
     );
   }
 
@@ -269,7 +342,7 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
                               ),
                           // Delete current exercise
                                 IconButton(
-                                  icon: const Icon(Icons.delete, color: Color.fromARGB(255, 185, 35, 35),),
+                                  icon: Icon(Icons.delete, color: AppColors.alert(context),),
                                   onPressed: () => setState(() {
                                     _exercises.removeAt(index);
                                   }),
@@ -282,6 +355,22 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
                         // ... expand the list into the Column
                         ...List.generate(exc['sets'].length, (setIndex) {
                           var currentSet = exc['sets'][setIndex];
+
+                          // e1RM Dynamic Calculation
+                          double pastE1RM = currentSet['pastE1RM'] ?? 0.0;
+                          double currentWeight = double.tryParse(currentSet['weightController'].text.replaceAll(',', '.')) ?? 0.0;
+                          double currentE1RM = currentWeight * (1 + currentSet['reps'] / 30);
+
+                          double progress = currentE1RM - pastE1RM;
+                          Icon iconForProgress;
+                          if (progress > 0) {
+                            iconForProgress = Icon(Icons.keyboard_double_arrow_up_rounded, color:AppColors.progressUp(context));
+                            } else if (progress < 0) {
+                            iconForProgress = Icon(Icons.keyboard_double_arrow_down_rounded, color:AppColors.progressDown(context));
+                          } else {
+                            iconForProgress = Icon(Icons.drag_handle_rounded, color:AppColors.progressEqual(context));
+                          }
+
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 8.0),
                             child: Row(
@@ -291,14 +380,15 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
                                   flex: 2,
                                   child: Text('Set ${setIndex + 1}', style: const TextStyle(fontWeight: FontWeight.bold)),
                                 ),
-                                const SizedBox(width: 8),
                                 
                                 // Weight input (Kg)
                                 Expanded(
                                   flex: 3,
                                   child: TextField(
                                     controller: currentSet['weightController'],
-                                    decoration: const InputDecoration(
+                                    onChanged: (val) => setState(() {}), // e1rm calculation upgrade withoud need for confirm
+                                    decoration: InputDecoration(
+                                      hintText: currentSet['hintWeight'],
                                       labelText: 'Weight (kg)',
                                       border: OutlineInputBorder(),
                                       isDense: true, // more compact text
@@ -320,10 +410,14 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
                                   icon: const Icon(Icons.add),
                                   onPressed: () => setState(() => currentSet['reps']++),
                                 ),
-                                
+                                const SizedBox(width: 4), 
+
+                                //arrow for progress
+                                iconForProgress,
+                                const SizedBox(width: 4), 
                                 // Delete current set
                                 IconButton(
-                                  icon: const Icon(Icons.delete, color: Color.fromARGB(255, 185, 35, 35),),
+                                  icon: Icon(Icons.delete, color: AppColors.alert(context),),
                                   onPressed: () => setState(() {
                                     if (exc['sets'].length > 1) exc['sets'].removeAt(setIndex);
                                   }),
