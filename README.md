@@ -14,7 +14,7 @@ _Fitness App to track your gym progress – Built with Flutter & Android Studio_
 ### **Philosophy** 
 This project was born out of the need for a **free, minimalist,** and above all, **private** alternative to modern fitness apps. GymTracker does not collect your personal data, requires no accounts, contains no ads, and expects no rewards in return.
 
-### 🚧 **Status:** Active development (v0.1.0)
+### 🚧 **Status:** Active development (v0.2.0)
 The core architecture, local database management, and workout tracking flows are fully functional. Analytics and UI refinements are currently being built.
 
 ### App Overview
