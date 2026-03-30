@@ -1,5 +1,7 @@
 ## HEAD
 
+# Version 0.2.0
+
 ## Breaking changes summary
 - **Breaking change:** Added `hintWeight` and `pastE1RM` to state map. The internal `_exercises` state was updated to support historical data tracking.
 
