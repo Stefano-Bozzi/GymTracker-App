@@ -21,10 +21,12 @@ class _CalendarPageState extends State<CalendarPage>{
 
   List<IsarWorkout> _session = [];
 
+  // to avoid empty message before all sessions are loaded
+  bool _isLoading = true;
   @override
   void initState() {
     super.initState();
-    
+
     _loadSession();
 
     // refresh page if notifier change
@@ -40,6 +42,9 @@ class _CalendarPageState extends State<CalendarPage>{
       // reverse the order
       _session = workoutFromDB.reversed.toList();
     });
+
+    // set loading flag false
+    _isLoading = false;
   }
 
   @override
@@ -50,7 +55,8 @@ class _CalendarPageState extends State<CalendarPage>{
       ),
       // if empty list show message
       body: _session.isEmpty
-          ? const Center(child: Text("No sessions yet. Tap the + button to track your first workout!"))
+          // avoid writing message for empty page if not finished loading.
+          ? (_isLoading == false ? const Center(child: Text("No sessions yet. Tap the + button to track your first workout!")) :const Center(child: Text(""))) 
           : ListView.builder(
               padding: const EdgeInsets.all(16),
               itemCount: _session.length,

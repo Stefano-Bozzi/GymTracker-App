@@ -20,6 +20,9 @@ class WorkoutPage extends StatefulWidget {
 class _WorkoutPageState extends State<WorkoutPage>{
 
   List<IsarTemplateWorkout> _templates = [];
+  
+  // to avoid empty message before all templates are loaded
+  bool _isLoading = true;
 
   @override
   void initState() {
@@ -40,6 +43,9 @@ class _WorkoutPageState extends State<WorkoutPage>{
       // reverse the order
       _templates = templatesFromDB.reversed.toList();
     });
+
+    // set loading flag false
+    _isLoading = false;
   }
 
   @override
@@ -50,7 +56,8 @@ class _WorkoutPageState extends State<WorkoutPage>{
       ),
       // if empty list show message
       body: _templates.isEmpty
-          ? const Center(child: Text("No workouts yet. Tap the + button to create one!"))
+          // avoid writing message for empty page if not finished loading.
+          ? (_isLoading == false ? const Center(child: Text("No workouts yet. Tap the + button to create one!")) : const Center(child: Text("")))
           : ListView.builder(
               padding: const EdgeInsets.all(16),
               itemCount: _templates.length,
