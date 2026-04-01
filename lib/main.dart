@@ -71,6 +71,7 @@ class MyApp extends StatelessWidget {
 
     // listen for changes in theme  
     return ValueListenableBuilder(valueListenable: themeNotifier, builder: (context, themeValue, child){
+      return ValueListenableBuilder(valueListenable: weightNotifier, builder: (context, weightValue, child){
         return MaterialApp(
           debugShowCheckedModeBanner: true,               // Shows the 'Debug' banner in the top-right corner during development.
           title: appName,                                 // Application title (visible in the operating system's task switcher).
@@ -81,5 +82,6 @@ class MyApp extends StatelessWidget {
                                                           // and the overall layout of the user interface.
         );
       });
+    });
   }
 }

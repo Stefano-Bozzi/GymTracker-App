@@ -15,3 +15,6 @@ ValueNotifier<bool> refreshCalendarPageNotifier = ValueNotifier(false);
 
 // Change theme
 ValueNotifier<String> themeNotifier = ValueNotifier('D');
+
+// Select weight Unit of Measurement
+ValueNotifier<String> weightNotifier = ValueNotifier('kg');

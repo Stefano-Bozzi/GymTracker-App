@@ -23,7 +23,7 @@ class _SettingsPageState extends State<SettingsPage> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          // theme selection via segmented button via ThemeNotifier
+          // theme selection via segmented button via ThemeNotifier ----------------
           const Text(
             "Aspect",
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
@@ -43,6 +43,31 @@ class _SettingsPageState extends State<SettingsPage> {
             selected: {themeNotifier.value},
             onSelectionChanged: (newSelection) {
                 themeNotifier.value = newSelection.first;
+            },
+          ),
+
+          // Unity of Measurement --------------------------------------
+          const SizedBox(height: 20),
+
+          const Text(
+            "Unity of Measurement",
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+
+          const SizedBox(height:8),
+          const Text(
+            "Choose between kg or lb",
+          ),
+          const SizedBox(height: 12),
+
+          SegmentedButton<String>(
+            segments: const [
+              ButtonSegment(value: "kg", label: Text("kg")),
+              ButtonSegment(value: "lb", label: Text("lb")),
+            ],
+            selected: {weightNotifier.value},
+            onSelectionChanged: (newSelection) {
+                weightNotifier.value = newSelection.first;
             },
           ),
         ],
