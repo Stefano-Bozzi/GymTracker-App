@@ -23,7 +23,9 @@ class _SettingsPageState extends State<SettingsPage> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          // theme selection via segmented button via ThemeNotifier ----------------
+
+          // THEME SELECTION --------------------------------------------
+          // theme selection via segmented button via ThemeNotifier
           const Text(
             "Aspect",
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
@@ -46,7 +48,7 @@ class _SettingsPageState extends State<SettingsPage> {
             },
           ),
 
-          // Unity of Measurement --------------------------------------
+          // UNITY OF MEASUREMENTS --------------------------------------
           const SizedBox(height: 20),
 
           const Text(
@@ -69,6 +71,37 @@ class _SettingsPageState extends State<SettingsPage> {
             onSelectionChanged: (newSelection) {
                 weightNotifier.value = newSelection.first;
             },
+          ),
+
+          // DATABASE MANAGEMENT ----------------------------------------
+
+          const SizedBox(height: 32),
+          const Divider(),
+          const SizedBox(height: 16),
+
+          const Text(
+            "Database Management",
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+
+          // -- SAVE (BACKUP) --
+          const Text("Backup & Export", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+          ListTile(
+            leading: const Icon(Icons.save),
+            title: const Text("Backup Database (.isar)"),
+            subtitle: const Text("Save an exact copy of your data"),
+            onTap: () => {},
+          ),
+
+          // -- UPLOAD (RESTORE) --
+          const SizedBox(height: 16),
+          const Text("Restore & Import", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+          ListTile(
+            leading: const Icon(Icons.restore),
+            title: const Text("Restore Database (.isar)"),
+            subtitle: const Text("Overwrite current data with a backup"),
+            onTap: () => {},
           ),
         ],
       ),
