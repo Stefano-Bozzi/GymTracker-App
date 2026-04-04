@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:gym_tracker/views/pages/licenses_page.dart';
+import 'package:gym_tracker/views/pages/settings_page.dart';
 import 'package:gym_tracker/constants/constants.dart';
 
 class AppDrawerWidget extends StatelessWidget {
@@ -52,7 +53,10 @@ class AppDrawerWidget extends StatelessWidget {
                 title: const Text('Settings'),
                 onTap: () {
                   // here the logic
-                  // Navigator.pop(context); 
+                  Navigator.pop(context); 
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context)=>SettingsPage(),),
+                  );
                 },
               ),
               
