@@ -53,6 +53,9 @@ dependencies:
   path_provider: ^2.1.5
   file_picker: ^10.3.10
 
+  # graphs
+  fl_chart: ^1.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

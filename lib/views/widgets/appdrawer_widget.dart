@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:gym_tracker/views/pages/licenses_page.dart';
 import 'package:gym_tracker/views/pages/settings_page.dart';
 import 'package:gym_tracker/constants/constants.dart';
+import 'package:gym_tracker/views/pages/statistics_page.dart';
 
 class AppDrawerWidget extends StatelessWidget {
   const AppDrawerWidget({super.key});
@@ -43,7 +44,11 @@ class AppDrawerWidget extends StatelessWidget {
                 leading: const Icon(Icons.bar_chart_rounded),
                 title: const Text('Statistics'),
                 onTap: () {
-                  // here the logic 
+                  // here the logic
+                  Navigator.pop(context); 
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context)=>StatisticsPage(),),
+                  ); 
                 },
               ),
               
