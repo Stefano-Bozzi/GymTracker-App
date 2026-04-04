@@ -208,18 +208,20 @@ Are you sure you want to proceed with the import?
       await newFile.copy(currentDbFile.path);
 
       if (context.mounted) {
+        // initializing database
+        final dirNewDb = await getApplicationDocumentsDirectory();
+        isar = await Isar.open(
+          [IsarWorkoutSchema, IsarTemplateWorkoutSchema],
+          directory: dirNewDb.path,
+        );
+        selectedPageNotifier.value = 0;
+
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text("Successfully overwritten Database!"),
             duration: Duration(seconds: 2),
           ),
         );
-        // initializing database
-        final dirNewDb = await getApplicationDocumentsDirectory();
-        isar = await Isar.open(
-          [IsarWorkoutSchema, IsarTemplateWorkoutSchema],
-          directory: dirNewDb.path,
-  );
       }
     } catch (e) {
       if (context.mounted){
