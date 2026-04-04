@@ -69,9 +69,46 @@ class _SettingsPageState extends State<SettingsPage> {
 
       // create name
       String date = DateTime.now().toIso8601String().split('T').first;
-      String destinationPath =
-          '$selectedDirectory/gym_tracker_backup_$date.isar';
+      String defaultName = 'gym_tracker_backup_$date';
+      TextEditingController savingNameController = TextEditingController(text: defaultName);
+      
+      // show dialog to insert name
+      if (!context.mounted) return;
+      String? finalFileName = await showDialog<String>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text('Backup-file Name'),
+          content: TextField(
+            controller: savingNameController,
+            decoration: const InputDecoration(
+              labelText: 'File name',
+              suffixText: '.isar', // fix extension
+              border: OutlineInputBorder(),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, null), // Cancel
+              child: const Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                // Confirm inserted text
+                Navigator.pop(ctx, savingNameController.text); 
+              },
+              child: const Text("Save"),
+            ),
+          ],
+        ),
+      );
 
+      // if user canceled interrupt
+      if (finalFileName == null || finalFileName.trim().isEmpty) {
+        return;
+      }
+
+      String destinationPath = '$selectedDirectory/${finalFileName.trim()}.isar';
+      
       // Copy isar file
       // isar has a secure copy when db is used
       await isar.copyToFile(destinationPath);
@@ -106,7 +143,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text("Exited"),
-            duration: Duration(seconds: 1),
+            duration: Duration(seconds: 3),
           ),
         );
       }
