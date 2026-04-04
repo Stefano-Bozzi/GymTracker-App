@@ -6,6 +6,29 @@ import 'package:gym_tracker/main.dart';
 import 'package:isar_community/isar.dart';
 import 'package:gym_tracker/constants/constants.dart';
 
+///Format weight display
+String formatWeight(double weight) {
+  return weight.toStringAsFixed(2).replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '');
+}
+
+///CHeck if weight is in kg
+bool isKg(String val){
+  return (val == 'kg' ? true : false);
+}
+
+/// Display weight in selected unit of measurement (kg or lb)
+double toDisplayWeight(double weightKg){
+  double weight = weightKg;
+
+  return (isKg(weightNotifier.value) ? weight : weight*kgToLb);
+}
+
+/// Save weight to isar DB always in kg
+double toDBWeight(double inputWeight){
+  double weight = inputWeight;
+
+  return (isKg(weightNotifier.value) ? weight : weight/kgToLb);
+}
 
 /// Check for past same exercise to make comparison
 Future<IsarExercise?> getLastExercise(String name, [int? currentWorkoutId]) async {
@@ -106,9 +129,9 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
         List<Map<String, dynamic>> _sets = [];
         for (var s in exc.sets) {
           _sets.add({
-            'weightController': TextEditingController(text: s.weight.toString()),
+            'weightController': TextEditingController(text: formatWeight(toDisplayWeight(s.weight))),
             'reps': s.reps,
-            'hintWeight' : 'Weight (kg)',
+            'hintWeight' : (isKg(weightNotifier.value) ? 'Weight (kg)' : 'Weight (lb)'),
             'pastE1RM': null,
           });
         }
@@ -128,7 +151,7 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
           _sets.add({
             'weightController': TextEditingController(),
             'reps': 1,
-            'hintWeight' : 'Weight (kg)',
+            'hintWeight' : (isKg(weightNotifier.value) ? 'Weight (kg)' : 'Weight (lb)'),
             'pastE1RM': null,
           });
         }
@@ -166,7 +189,8 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
           for (int i =0; i < sets.length; i++){
             if (i < pastExc.sets.length){
               IsarWorkoutSet pastSet = pastExc.sets[i];
-              sets[i]['hintWeight'] = '${pastSet.weight} kg';
+              double displayWeight = toDisplayWeight(pastSet.weight);
+              sets[i]['hintWeight'] = '${formatWeight(displayWeight)} ${isKg(weightNotifier.value) ? 'kg' : 'lb'}';
               sets[i]['pastE1RM'] = pastSet.e1RM;
               if (widget.sessionToEdit == null){
                 sets[i]['reps'] = pastSet.reps;
@@ -189,7 +213,7 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
           {
             'weightController': TextEditingController(),
             'reps': 1,
-            'hintWeight':'Weight (kg)',
+            'hintWeight' : (isKg(weightNotifier.value) ? 'Weight (kg)' : 'Weight (lb)'),
             'pastE1RM':null,
           }
         ],
@@ -224,7 +248,7 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
     for (var exc in _exercises) {
       List<WorkoutSet> sessionSets = List.generate(exc['sets'].length, (index) {
         var currentSet = exc['sets'][index];
-        double weightValue = double.tryParse(currentSet['weightController'].text.replaceAll(',', '.')) ?? 0.0;
+        double weightValue = toDBWeight(double.tryParse(currentSet['weightController'].text.replaceAll(',', '.')) ?? 0.0);
         
         return WorkoutSet(reps: currentSet['reps'], weight: weightValue);
       });
@@ -358,7 +382,7 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
 
                           // e1RM Dynamic Calculation
                           double pastE1RM = currentSet['pastE1RM'] ?? 0.0;
-                          double currentWeight = double.tryParse(currentSet['weightController'].text.replaceAll(',', '.')) ?? 0.0;
+                          double currentWeight = toDBWeight(double.tryParse(currentSet['weightController'].text.replaceAll(',', '.')) ?? 0.0);
                           double currentE1RM = currentWeight * (1 + currentSet['reps'] / 30);
 
                           double progress = currentE1RM - pastE1RM;
@@ -383,15 +407,16 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
                                 
                                 // Weight input (Kg)
                                 Expanded(
-                                  flex: 3,
+                                  flex: 4,
                                   child: TextField(
                                     controller: currentSet['weightController'],
                                     onChanged: (val) => setState(() {}), // e1rm calculation upgrade withoud need for confirm
                                     decoration: InputDecoration(
                                       hintText: currentSet['hintWeight'],
-                                      labelText: 'Weight (kg)',
+                                      labelText: (isKg(weightNotifier.value) ? 'Weight (kg)' : 'Weight (lb)'),
                                       border: OutlineInputBorder(),
                                       isDense: true, // more compact text
+                                      contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
                                     ),
                                     keyboardType: TextInputType.number,
                                   ),

@@ -12,3 +12,9 @@ ValueNotifier<bool> refreshWorkoutPageNotifier = ValueNotifier(false);
 
 // Refresh Calendar Page when added a new session
 ValueNotifier<bool> refreshCalendarPageNotifier = ValueNotifier(false);
+
+// Change theme
+ValueNotifier<String> themeNotifier = ValueNotifier('A');
+
+// Select weight Unit of Measurement
+ValueNotifier<String> weightNotifier = ValueNotifier('kg');

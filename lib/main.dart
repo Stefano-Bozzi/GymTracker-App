@@ -7,6 +7,7 @@
 //----------------------------------------------------------------
 
 import 'package:flutter/material.dart';                   // Imports the Flutter Material library for UI widgets and themes.
+import 'package:gym_tracker/data/notifiers.dart';
 import 'package:gym_tracker/views/widget_tree.dart';      // Imports the primary Widget that defines the application structure (Scaffold, Navigation).
 import 'package:gym_tracker/constants/constants.dart';    // Imports global constants like the app name and theme definitions.
 import 'package:isar_community/isar.dart';
@@ -67,14 +68,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) { 
     // The build method describes the widget's user interface.
     // Any changes here can be quickly updated via Hot Reload.
-    return MaterialApp(
-      debugShowCheckedModeBanner: true,               // Shows the 'Debug' banner in the top-right corner during development.
-      title: appName,                                 // Application title (visible in the operating system's task switcher).
-      theme: ThemeData(colorScheme: lightScheme),     
-      darkTheme: ThemeData(colorScheme: darkScheme),  
-      themeMode: ThemeMode.system,                    // Chooses the theme (light/dark) based on the operating system settings.
-      home: const WidgetTree(),                       // The main widget that defines the Scaffold, navigation, 
-                                                      // and the overall layout of the user interface.
-    );
+
+    // listen for changes in theme  
+    return ValueListenableBuilder(valueListenable: themeNotifier, builder: (context, themeValue, child){
+      return ValueListenableBuilder(valueListenable: weightNotifier, builder: (context, weightValue, child){
+        return MaterialApp(
+          debugShowCheckedModeBanner: true,               // Shows the 'Debug' banner in the top-right corner during development.
+          title: appName,                                 // Application title (visible in the operating system's task switcher).
+          theme: ThemeData(colorScheme: lightScheme),     
+          darkTheme: ThemeData(colorScheme: darkScheme),  
+          themeMode: (themeValue == 'A' ? ThemeMode.system : (themeValue == 'L' ? ThemeMode.light : ThemeMode.dark)),                    // Chooses the theme (automatic/light/dark) based on settings.
+          home: const WidgetTree(),                       // The main widget that defines the Scaffold, navigation, 
+                                                          // and the overall layout of the user interface.
+        );
+      });
+    });
   }
 }
