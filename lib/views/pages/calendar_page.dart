@@ -71,7 +71,13 @@ class _CalendarPageState extends State<CalendarPage>{
                     child: Row(
                       children: [
                         Expanded(
-                          child: Text(session.name)
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(session.name),
+                              Text(session.date.toString().substring(0, 16), style: TextStyle(color: Colors.grey)),
+                            ],
+                          ),
                         ),
                         const SizedBox(width: 16),
                         // Sets counter
