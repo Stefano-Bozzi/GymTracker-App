@@ -14,6 +14,7 @@ import 'package:isar_community/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:gym_tracker/data/workout_isar.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:device_preview/device_preview.dart';
 
 // global var to sign in to database into app
 late Isar isar;
@@ -45,7 +46,13 @@ void main() async{
     Future.delayed(const Duration(seconds: 1)), // min timer to show splash start page avoiding too fast cases.
   ]);
 
-  runApp(const MyApp()); // Launches the Flutter application, style setup.
+  // Launch the app wrapped in DevicePreview for app preview
+  runApp(
+    DevicePreview(                                        
+      enabled: false, // DEVICE PREVIEW
+      builder: (context) => const MyApp(),
+    ),
+  ); 
 
   // Close Slash page when finished drawing first app page
   WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -73,6 +80,8 @@ class MyApp extends StatelessWidget {
     return ValueListenableBuilder(valueListenable: themeNotifier, builder: (context, themeValue, child){
       return ValueListenableBuilder(valueListenable: weightNotifier, builder: (context, weightValue, child){
         return MaterialApp(
+          locale: DevicePreview.locale(context),          // DEVICE PREVIEW
+          builder: DevicePreview.appBuilder,              // DEVICE PREVIEW
           debugShowCheckedModeBanner: true,               // Shows the 'Debug' banner in the top-right corner during development.
           title: appName,                                 // Application title (visible in the operating system's task switcher).
           theme: ThemeData(colorScheme: lightScheme),     
