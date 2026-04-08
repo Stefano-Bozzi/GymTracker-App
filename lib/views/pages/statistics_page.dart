@@ -66,10 +66,9 @@ class _StatisticsPageState extends State<StatisticsPage> {
     List<double> buckets = List.filled(numBars, 0);
 
     for (var w in workouts) {
-      if (w.date == null) continue;
 
       // Calculate how many days ago was registered the session
-      int daysAgo = now.difference(w.date!).inDays;
+      int daysAgo = now.difference(w.date).inDays;
       
       // Calculate in which column need to be
       int barIndex = (numBars - 1) - (daysAgo ~/ daysPerBar);

@@ -104,7 +104,7 @@ class _CreateSessionSheet extends StatefulWidget {
   final IsarWorkout? sessionToEdit;
   final IsarTemplateWorkout? baseTemplate;
 
-  const _CreateSessionSheet({super.key, this.sessionToEdit, this.baseTemplate});
+  const _CreateSessionSheet({this.sessionToEdit, this.baseTemplate});
 
   @override
   State<_CreateSessionSheet> createState() => _CreateSessionSheetState();
@@ -126,9 +126,9 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
     if (widget.sessionToEdit != null) {
       _sessionWorkoutName.text = widget.sessionToEdit!.name;
       for (var exc in widget.sessionToEdit!.exercises) {
-        List<Map<String, dynamic>> _sets = [];
+        List<Map<String, dynamic>> setsList = [];
         for (var s in exc.sets) {
-          _sets.add({
+          setsList.add({
             'weightController': TextEditingController(text: formatWeight(toDisplayWeight(s.weight))),
             'reps': s.reps,
             'hintWeight' : '...',
@@ -137,7 +137,7 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
         }
         _exercises.add({
           'nameController': TextEditingController(text: exc.name),
-          'sets': _sets,
+          'sets': setsList,
           'focusNode': FocusNode(),
         });
       }
@@ -146,9 +146,9 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
     else if (widget.baseTemplate != null) {
       _sessionWorkoutName.text = widget.baseTemplate!.name;
       for (var exc in widget.baseTemplate!.exercises) {
-        List<Map<String, dynamic>> _sets = [];
-        for (var s in exc.sets) {
-          _sets.add({
+        List<Map<String, dynamic>> setsList = [];
+        for (var _ in exc.sets) {
+          setsList.add({
             'weightController': TextEditingController(),
             'reps': 1,
             'hintWeight' : '...',
@@ -157,7 +157,7 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
         }
         _exercises.add({
           'nameController': TextEditingController(text: exc.name),
-          'sets': _sets,
+          'sets': setsList,
           'focusNode': FocusNode(),
         });
       }
@@ -414,7 +414,7 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
                                 const SizedBox(width: 4), 
                                 // Delete current set
                                 const Opacity(opacity: 0.0,child:IconButton(
-                                  icon: const Icon(Icons.delete),
+                                  icon: Icon(Icons.delete),
                                   onPressed: null,
                                 ),),
                               ],
@@ -482,8 +482,9 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
                                 IconButton(
                                   icon: const Icon(Icons.remove),
                                   onPressed: () => setState(() {
-                                    if (currentSet['reps'] > 1)
+                                    if (currentSet['reps'] > 1){
                                       currentSet['reps']--;
+                                    }
                                   }),
                                 ),
                                 // Fixed container for 2 digits

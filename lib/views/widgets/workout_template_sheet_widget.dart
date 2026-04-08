@@ -19,7 +19,7 @@ void workoutTemplateCreation(BuildContext context,{IsarTemplateWorkout? template
 /// Uses a separate State class to preserve user input during UI rebuilds.
 class _CreateTemplateSheet extends StatefulWidget {
   final IsarTemplateWorkout? templateToEdit;
-  const _CreateTemplateSheet({super.key, this.templateToEdit});
+  const _CreateTemplateSheet({this.templateToEdit});
 
   // Instantiates and links the mutable state to this widget.
   @override
@@ -122,6 +122,7 @@ class _CreateTemplateSheetState extends State<_CreateTemplateSheet> {
     });
 
     refreshWorkoutPageNotifier.value = !refreshWorkoutPageNotifier.value;
+    if (!mounted) return;
     // Close popup
     Navigator.pop(context);
 

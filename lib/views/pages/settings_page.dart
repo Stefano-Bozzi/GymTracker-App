@@ -215,7 +215,8 @@ Are you sure you want to proceed with the import?
           directory: dirNewDb.path,
         );
         selectedPageNotifier.value = 0;
-
+        
+        if (!context.mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text("Successfully overwritten Database!"),

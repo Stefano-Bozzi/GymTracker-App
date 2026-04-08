@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:gym_tracker/data/notifiers.dart';
 import 'package:gym_tracker/views/widgets/workout_template_sheet_widget.dart';
 import 'package:gym_tracker/views/widgets/workout_session_sheet_widget.dart';
-import 'package:gym_tracker/main.dart';
 
 class DinamicFAB extends StatelessWidget {
   const DinamicFAB({super.key});
