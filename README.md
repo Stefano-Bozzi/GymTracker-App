@@ -50,6 +50,49 @@ The core architecture, local database management, and workout tracking flows are
 5. **Start Session:** Select a pre-saved template to begin your daily workout.
 6. **Live Tracking:** Log your actual weight and reps, with dynamic e1RM trend arrows guiding your progress.
 
+
+### Interactive App Tour
+
+<table width="100%" align="center">
+  <tr>
+    <td width="33.3%" align="center" valign="top">
+      <img src="assets/tour/tour_newtemplate.webp" width="100%" style="border: 1px solid #ddd; border-radius: 10px;"><br><br>
+      <b>1. Create a Template</b><br>
+      <small>Go to the Workouts page to see all your templates. Tap "New Template" to create a new one.</small>
+    </td>
+    <td width="33.3%" align="center" valign="top">
+      <img src="assets/tour/tour_session1.webp" width="100%" style="border: 1px solid #ddd; border-radius: 10px;"><br><br>
+      <b>2. Start a Session</b><br>
+      <small>Navigate to the Calendar page and tap "New Session". Choose your template and start your workout.</small>
+    </td>
+    <td width="33.3%" align="center" valign="top">
+      <img src="assets/tour/tour_session2.webp" width="100%" style="border: 1px solid #ddd; border-radius: 10px;"><br><br>
+      <b>3. Track Your Progress</b><br>
+      <small>When logging a session, your past weights are displayed. Colored arrows show your trend: green (progress), orange (regress), or blue (stall).</small>
+    </td>
+  </tr>
+  <tr>
+    <td width="33.3%" align="center" valign="top">
+      <br>
+      <img src="assets/tour/tour_options.webp" width="100%" style="border: 1px solid #ddd; border-radius: 10px;"><br><br>
+      <b>4. Options Menu</b><br>
+      <small>Open the side menu to access additional app features.</small>
+    </td>
+    <td width="33.3%" align="center" valign="top">
+      <br>
+      <img src="assets/tour/tour_statistics.webp" width="100%" style="border: 1px solid #ddd; border-radius: 10px;"><br><br>
+      <b>5. Statistics</b><br>
+      <small>Analyze your workout data and track your improvements over time.</small>
+    </td>
+    <td width="33.3%" align="center" valign="top">
+      <br>
+      <img src="assets/tour/tour_settings.webp" width="100%" style="border: 1px solid #ddd; border-radius: 10px;"><br><br>
+      <b>6. Settings</b><br>
+      <small>Customize the app preferences in the Settings page.</small>
+    </td>
+  </tr>
+</table>
+
 ## Current Features
 * **Interactive App Tour:** A step-by-step onboarding guide for new users to master the app's workflow from the first launch.
 * **Workout Templates:** Create, edit, and manage custom workout routines with specific exercises.
