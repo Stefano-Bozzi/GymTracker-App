@@ -57,8 +57,31 @@ class _WorkoutPageState extends State<WorkoutPage>{
       // if empty list show message
       body: _templates.isEmpty
           // avoid writing message for empty page if not finished loading.
-          ? (_isLoading == false ? const Center(child: Text("No workouts yet. Tap the + button to create one!")) : const Center(child: Text("")))
-          : ListView.builder(
+          ? (_isLoading == false 
+        ? Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text.rich(
+                TextSpan(
+                  style: const TextStyle(fontSize: 14), // Stile base per tutto il testo
+                  children: [
+                    const TextSpan(text: "No workouts yet. Tap the "),
+                    WidgetSpan( // Show current and correct icon instead of simple text
+                      alignment: PlaceholderAlignment.middle, // Align icon to the center of text (inline position)
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                        child: Icon(Icons.add_box_rounded, size: 18), // Icon
+                      ),
+                    ),
+                    const TextSpan(text: " button to create one!"),
+                  ],
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ) 
+        : const SizedBox.shrink())
+    : ListView.builder(
               padding: const EdgeInsets.all(16),
               itemCount: _templates.length,
               itemBuilder: (context, index) {

@@ -55,6 +55,7 @@ dependencies:
 
   # graphs
   fl_chart: ^1.2.0
+  device_preview: ^1.3.1
 
 dev_dependencies:
   flutter_test:
