@@ -63,8 +63,8 @@ void showAllTemplates(BuildContext context) async {
     builder: (context) {
       if (templates.isEmpty) {
          return const Padding(
-           padding: EdgeInsets.all(32.0),
-           child: Center(child: Text("No templates found. Go to Workouts to create one!")),
+           padding: EdgeInsets.all(16.0),
+           child: Center(child: Text("No templates found. Go to Workouts to create one!",textAlign: TextAlign.center)),
          );
       }
 
@@ -131,7 +131,7 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
           _sets.add({
             'weightController': TextEditingController(text: formatWeight(toDisplayWeight(s.weight))),
             'reps': s.reps,
-            'hintWeight' : (isKg(weightNotifier.value) ? 'Weight (kg)' : 'Weight (lb)'),
+            'hintWeight' : '...',
             'pastE1RM': null,
           });
         }
@@ -151,7 +151,7 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
           _sets.add({
             'weightController': TextEditingController(),
             'reps': 1,
-            'hintWeight' : (isKg(weightNotifier.value) ? 'Weight (kg)' : 'Weight (lb)'),
+            'hintWeight' : '...',
             'pastE1RM': null,
           });
         }
@@ -190,7 +190,7 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
             if (i < pastExc.sets.length){
               IsarWorkoutSet pastSet = pastExc.sets[i];
               double displayWeight = toDisplayWeight(pastSet.weight);
-              sets[i]['hintWeight'] = '${formatWeight(displayWeight)} ${isKg(weightNotifier.value) ? 'kg' : 'lb'}';
+              sets[i]['hintWeight'] = formatWeight(displayWeight);
               sets[i]['pastE1RM'] = pastSet.e1RM;
               if (widget.sessionToEdit == null){
                 sets[i]['reps'] = pastSet.reps;
@@ -213,7 +213,7 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
           {
             'weightController': TextEditingController(),
             'reps': 1,
-            'hintWeight' : (isKg(weightNotifier.value) ? 'Weight (kg)' : 'Weight (lb)'),
+            'hintWeight' : '...',
             'pastE1RM':null,
           }
         ],
@@ -329,7 +329,7 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
     final bottomPadding = MediaQuery.of(context).viewInsets.bottom;
     
     return Padding(
-      padding: EdgeInsets.only(bottom: bottomPadding, left: 16, right: 16, top: 16),
+            padding: EdgeInsets.only(bottom: bottomPadding, left: 16, right: 16, top: 16),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -375,24 +375,79 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
                         ),
                         const SizedBox(height: 16),
                         
+                        // --- Label Row ---
+                        Row(
+                          children: [
+                            // Set number
+                                Expanded(
+                                  flex: 2,
+                                  child: Opacity(opacity: 0.0,
+                                  child: Text('Set 0', style: const TextStyle(fontWeight: FontWeight.bold)),
+                                )),
+                                
+                                // Weight input (Kg)
+                                Expanded(
+                                  flex: 4,
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown, // scale down if necessary
+                                    child: Text(
+                                      isKg(weightNotifier.value) ? 'Weight (kg)' : 'Weight (lb)',
+                                      style: const TextStyle(fontWeight: FontWeight.bold),
+                                      maxLines: 1, // only one line
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                
+                                // Fixed container centered with reps number
+                                SizedBox(
+                                  width: 116, //20+48+48
+                                  child: Center(
+                                    child: Text('Reps', style:const TextStyle(fontWeight: FontWeight.bold)),
+                                  ),
+                                ),
+                                
+                                const SizedBox(width: 4), 
+
+                                //arrow for progress
+                                const Opacity(opacity: 0.0, child: Icon(Icons.abc_outlined)),
+                                const SizedBox(width: 4), 
+                                // Delete current set
+                                const Opacity(opacity: 0.0,child:IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: null,
+                                ),),
+                              ],
+                        ),
+                        
                         // a row for each Set
                         // ... expand the list into the Column
                         ...List.generate(exc['sets'].length, (setIndex) {
                           var currentSet = exc['sets'][setIndex];
 
-                          // e1RM Dynamic Calculation
+                          // progress arrow logic
                           double pastE1RM = currentSet['pastE1RM'] ?? 0.0;
-                          double currentWeight = toDBWeight(double.tryParse(currentSet['weightController'].text.replaceAll(',', '.')) ?? 0.0);
-                          double currentE1RM = currentWeight * (1 + currentSet['reps'] / 30);
-
-                          double progress = currentE1RM - pastE1RM;
+                          String currentWeightText = currentSet['weightController'].text.trim();
+                          
                           Icon iconForProgress;
-                          if (progress > 0) {
-                            iconForProgress = Icon(Icons.keyboard_double_arrow_up_rounded, color:AppColors.progressUp(context));
-                            } else if (progress < 0) {
-                            iconForProgress = Icon(Icons.keyboard_double_arrow_down_rounded, color:AppColors.progressDown(context));
+
+                          // if field is empty, shows = (does not calculate negative progress)
+                          if (currentWeightText.isEmpty) {
+                            iconForProgress = Icon(Icons.drag_handle_rounded, color: AppColors.progressEqual(context));
                           } else {
-                            iconForProgress = Icon(Icons.drag_handle_rounded, color:AppColors.progressEqual(context));
+                            // Calculate true progress only if field is actively filled
+                            double currentWeight = toDBWeight(double.tryParse(currentWeightText.replaceAll(',', '.')) ?? 0.0);
+                            double currentE1RM = currentWeight * (1 + currentSet['reps'] / 30);
+
+                            double progress = currentE1RM - pastE1RM;
+                            
+                            if (progress > 0) {
+                              iconForProgress = Icon(Icons.keyboard_double_arrow_up_rounded, color:AppColors.progressUp(context));
+                            } else if (progress < 0) {
+                              iconForProgress = Icon(Icons.keyboard_double_arrow_down_rounded, color:AppColors.progressDown(context));
+                            } else {
+                              iconForProgress = Icon(Icons.drag_handle_rounded, color:AppColors.progressEqual(context));
+                            }
                           }
 
                           return Padding(
@@ -409,11 +464,11 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
                                 Expanded(
                                   flex: 4,
                                   child: TextField(
+                                    textAlign: TextAlign.center,
                                     controller: currentSet['weightController'],
                                     onChanged: (val) => setState(() {}), // e1rm calculation upgrade withoud need for confirm
                                     decoration: InputDecoration(
                                       hintText: currentSet['hintWeight'],
-                                      labelText: (isKg(weightNotifier.value) ? 'Weight (kg)' : 'Weight (lb)'),
                                       border: OutlineInputBorder(),
                                       isDense: true, // more compact text
                                       contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
@@ -427,13 +482,21 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
                                 IconButton(
                                   icon: const Icon(Icons.remove),
                                   onPressed: () => setState(() {
-                                    if (currentSet['reps'] > 1) currentSet['reps']--;
+                                    if (currentSet['reps'] > 1)
+                                      currentSet['reps']--;
                                   }),
                                 ),
-                                Text('${currentSet['reps']} Reps'),
+                                // Fixed container for 2 digits
+                                SizedBox(
+                                  width: 20,
+                                  child: Center(
+                                    child: Text('${currentSet['reps']}'),
+                                  ),
+                                ),
                                 IconButton(
                                   icon: const Icon(Icons.add),
-                                  onPressed: () => setState(() => currentSet['reps']++),
+                                  onPressed: () =>
+                                      setState(() => currentSet['reps']++),
                                 ),
                                 const SizedBox(width: 4), 
 
@@ -457,6 +520,8 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
                             exc['sets'].add({
                               'weightController': TextEditingController(),
                               'reps': 1,
+                              'hintWeight' : '...',
+                              'pastE1RM':null,
                             });
                           }),
                           icon: const Icon(Icons.add),
