@@ -63,8 +63,8 @@ void showAllTemplates(BuildContext context) async {
     builder: (context) {
       if (templates.isEmpty) {
          return const Padding(
-           padding: EdgeInsets.all(32.0),
-           child: Center(child: Text("No templates found. Go to Workouts to create one!")),
+           padding: EdgeInsets.all(16.0),
+           child: Center(child: Text("No templates found. Go to Workouts to create one!",textAlign: TextAlign.center)),
          );
       }
 

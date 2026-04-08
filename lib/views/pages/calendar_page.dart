@@ -55,9 +55,31 @@ class _CalendarPageState extends State<CalendarPage>{
       ),
       // if empty list show message
       body: _session.isEmpty
-          // avoid writing message for empty page if not finished loading.
-          ? (_isLoading == false ? const Center(child: Text("No sessions yet. Tap the + button to track your first workout!")) :const Center(child: Text(""))) 
-          : ListView.builder(
+    ? (_isLoading == false 
+        ? Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text.rich(
+                TextSpan(
+                  style: const TextStyle(fontSize: 14),
+                  children: [
+                    const TextSpan(text: "No sessions yet. Tap the "),
+                    WidgetSpan( // Show current and correct icon instead of simple text
+                      alignment: PlaceholderAlignment.middle, // Align icon to the center of text (inline position)
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                        child: Icon(Icons.play_arrow_rounded, size: 18), // Icon
+                      ),
+                    ),
+                    const TextSpan(text: " button to track your first workout!"),
+                  ],
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ) 
+        : const SizedBox.shrink())
+    : ListView.builder(
               padding: const EdgeInsets.all(16),
               itemCount: _session.length,
               itemBuilder: (context, index) {
