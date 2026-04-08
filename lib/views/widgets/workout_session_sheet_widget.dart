@@ -329,7 +329,7 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
     final bottomPadding = MediaQuery.of(context).viewInsets.bottom;
     
     return Padding(
-      padding: EdgeInsets.only(bottom: bottomPadding, left: 16, right: 16, top: 16),
+            padding: EdgeInsets.only(bottom: bottomPadding, left: 16, right: 16, top: 16),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -374,6 +374,51 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
                           ],
                         ),
                         const SizedBox(height: 16),
+                        
+                        // --- Label Row ---
+                        Row(
+                          children: [
+                            // Set number
+                                Expanded(
+                                  flex: 2,
+                                  child: Opacity(opacity: 0.0,
+                                  child: Text('Set 0', style: const TextStyle(fontWeight: FontWeight.bold)),
+                                )),
+                                
+                                // Weight input (Kg)
+                                Expanded(
+                                  flex: 4,
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown, // scale down if necessary
+                                    child: Text(
+                                      isKg(weightNotifier.value) ? 'Weight (kg)' : 'Weight (lb)',
+                                      style: const TextStyle(fontWeight: FontWeight.bold),
+                                      maxLines: 1, // only one line
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                
+                                // Fixed container centered with reps number
+                                SizedBox(
+                                  width: 20+48+48,
+                                  child: Center(
+                                    child: Text('Reps', style:const TextStyle(fontWeight: FontWeight.bold)),
+                                  ),
+                                ),
+                                
+                                const SizedBox(width: 4), 
+
+                                //arrow for progress
+                                const Opacity(opacity: 0.0, child: Icon(Icons.abc_outlined)),
+                                const SizedBox(width: 4), 
+                                // Delete current set
+                                const Opacity(opacity: 0.0,child:IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: null,
+                                ),),
+                              ],
+                        ),
                         
                         // a row for each Set
                         // ... expand the list into the Column
@@ -427,13 +472,21 @@ class _CreateSessionSheetState extends State<_CreateSessionSheet> {
                                 IconButton(
                                   icon: const Icon(Icons.remove),
                                   onPressed: () => setState(() {
-                                    if (currentSet['reps'] > 1) currentSet['reps']--;
+                                    if (currentSet['reps'] > 1)
+                                      currentSet['reps']--;
                                   }),
                                 ),
-                                Text('${currentSet['reps']} Reps'),
+                                // Fixed container for 2 digits
+                                SizedBox(
+                                  width: 20,
+                                  child: Center(
+                                    child: Text('${currentSet['reps']}'),
+                                  ),
+                                ),
                                 IconButton(
                                   icon: const Icon(Icons.add),
-                                  onPressed: () => setState(() => currentSet['reps']++),
+                                  onPressed: () =>
+                                      setState(() => currentSet['reps']++),
                                 ),
                                 const SizedBox(width: 4), 
 
