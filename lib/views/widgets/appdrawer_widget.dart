@@ -7,6 +7,7 @@ import 'package:gym_tracker/views/pages/licenses_page.dart';
 import 'package:gym_tracker/views/pages/settings_page.dart';
 import 'package:gym_tracker/constants/constants.dart';
 import 'package:gym_tracker/views/pages/statistics_page.dart';
+import 'package:gym_tracker/views/widgets/onboarding_dialog.dart';
 
 class AppDrawerWidget extends StatelessWidget {
   const AppDrawerWidget({super.key});
@@ -76,6 +77,20 @@ class AppDrawerWidget extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (context) => const LicensesPage(),
                     ),
+                  );
+                },
+              ),
+
+              // AppTour
+              ListTile(
+                leading: const Icon(Icons.question_mark_rounded),
+                title: const Text('App Tour'),
+                onTap: () {
+                  Navigator.pop(context);
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) => const OnboardingDialog(),
                   );
                 },
               ),
