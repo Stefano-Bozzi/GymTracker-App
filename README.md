@@ -7,15 +7,15 @@ _Fitness App to track your gym progress – Built with Flutter & Android Studio_
 [![Dart](https://img.shields.io/badge/Dart-3.x-blue.svg)](https://dart.dev/)
 [![Android Studio](https://img.shields.io/badge/Android%20Studio-Otter%202025.x-blue.svg)](https://developer.android.com/studio)
 [![Isar](https://img.shields.io/badge/Database-Isar--Community-purple)](https://isar-community.dev/)
-[![Status](https://img.shields.io/badge/status-active--development-yellow.svg)](https://github.com/Stefano-Bozzi/GymTracker-App)
+[![Status](https://img.shields.io/badge/status-v1.0.0--stable-green.svg)](https://github.com/Stefano-Bozzi/GymTracker-App)
 
 **GymTracker** is an offline-first smartphone application that helps users track their gym workouts, manage routines, and monitor their progress over time.
 
-### **Philosophy** 
+### **Philosophy**
 This project was born out of the need for a **free, minimalist,** and above all, **private** alternative to modern fitness apps. GymTracker does not collect your personal data, requires no accounts, contains no ads, and expects no rewards in return.
 
-### 🚧 **Status:** Active development (v0.2.0)
-The core architecture, local database management, and workout tracking flows are fully functional. Analytics and UI refinements are currently being built.
+### ✅ **Status:** Stable Release (v1.0.0)
+The core architecture, local database management, and workout tracking flows are fully functional. This stable version includes an interactive onboarding tour, frequency statistics, and full data backup capabilities.
 
 ### App Overview
 
@@ -51,13 +51,21 @@ The core architecture, local database management, and workout tracking flows are
 6. **Live Tracking:** Log your actual weight and reps, with dynamic e1RM trend arrows guiding your progress.
 
 ## Current Features
+* **Interactive App Tour:** A step-by-step onboarding guide for new users to master the app's workflow from the first launch.
 * **Workout Templates:** Create, edit, and manage custom workout routines with specific exercises.
 * **Smart Session Tracking:** Start a new workout session instantly by choosing a pre-saved template.
-The app automatically fetches your last performance for each exercise, showing previous weights as convenient grey placeholders.
-* **Real-Time e1RM Trends:** As you type your weight and reps, the app instantly calculates your estimated 1-Rep Max, displaying dynamic arrows (Green Up, Orange Down, Blue Equal) to visualize your progressive overload in real-time.
-* **Granular Control:** Dynamically add, edit, or remove individual sets during a workout, recording both **Weight (kg)** and **Reps** with interactive UI elements.
-* **Workout History:** View a chronological list of all your completed workout sessions in the Calendar tab.
+The app automatically fetches your last performance for each exercise, showing previous weights as grey placeholders.
+* **Real-Time e1RM Trends:** As you type your weight and reps, the app instantly calculates your estimated 1-Rep Max, displaying dynamic arrows (Green, Orange, Blue) to visualize progressive overload in real-time.
+* **Workout Statistics:** Monitor your training frequency and consistency over different time periods in a dedicated page.
+* **Comprehensive Settings:** Toggle between *Auto/Light/Dark themes*, **choose unit preferences (kg/lb)**, and manage **Backup/Restore** for your local database.
+* **Multi-Device Support:** UI optimized with responsive padding and alignment to ensure a consistent experience across all screen sizes.
 * **100% Offline & Private:** All data is securely stored locally on your device via the Isar Database (thanks to [Isar Community](https://pub.dev/packages/isar_community)). No cloud syncing, zero privacy risks.
+
+### 🚀 **Upcoming Updates**
+* **Advanced Statistics:** In-depth charts and volume analysis for individual exercises.
+* **Muscle Groups:** Categorize exercises to track body part distribution.
+* **Template Flexibility:** Support for reordering exercises during the template creation phase.
+* **Descriptions:** Add custom notes and descriptions to both Workouts and Exercises.
 
 ---
 

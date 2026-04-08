@@ -1,12 +1,34 @@
 ## HEAD
 
+# Version 1.0.0 (First Major Release)
+
+- *Fix*: Avoid empty-page-message flickering during page-changing (see [this commit](https://github.com/Stefano-Bozzi/GymTracker-App/commit/d2151b38ff4c48e3169a3964dd291b9a33379afd)).
+- *New Feature*: Implement Settings page ([#8](https://github.com/Stefano-Bozzi/GymTracker-App/pull/8))
+    - Global toggles for auto/light/dark theme modes.
+    - Global toggle for unit measurement preferences (kg/lb).
+    - Backup and Restore capabilities for the local Isar database using system file pickers.
+- *New Feature*: Add Statistics page ([#9](https://github.com/Stefano-Bozzi/GymTracker-App/pull/9))
+- *New Feature*: Add date to session visualization in Calendar page (see [this commit](https://github.com/Stefano-Bozzi/GymTracker-App/commit/a145e6cd098ae0a731bce6770edf5b4df36f9cd2)).
+- *New Feature*: UI/UX Optimization for multi-device support ([#10](https://github.com/Stefano-Bozzi/GymTracker-App/pull/10))
+    - Added horizontal padding on the Home page and empty states to prevent text from touching screen edges.
+    - Improved empty list messages with inline Material icons (▶ and +) using `Text.rich`.
+    - Cleaned up weight insertion UI by centering text and replacing floating `labelText` with dynamic `hintText`.
+    - Fixed E1RM visual logic: empty weight fields now correctly display a neutral `=` indicator.
+- *New Feature*: Implement Interactive App Tour & Onboarding ([#11](https://github.com/Stefano-Bozzi/GymTracker-App/pull/11))
+    - Persistent first-launch detection using `SharedPreferences` to automatically trigger the guide.
+    - Multi-step interactive walkthrough with `.webp` visual aids and animated progress indicators.
+    - Manual "App Tour" access added to the side drawer for on-demand review.
+    - Responsive dialog design with adaptive scaling (85% height, 95% width) for multi-device support.
+
+---
+
 # Version 0.2.0
 
 ## Breaking changes summary
 - **Breaking change:** Added `hintWeight` and `pastE1RM` to state map. The internal `_exercises` state was updated to support historical data tracking.
 
 ---
-- *New Feature*: Add adaptive icons and splash-screen (see[this commit](https://github.com/Stefano-Bozzi/GymTracker-App/commit/ce0f11f4d9f0ea9c24a7b6db3a7edc7124bb5bf3)).
+- *New Feature*: Add adaptive icons and splash-screen (see [this commit](https://github.com/Stefano-Bozzi/GymTracker-App/commit/ce0f11f4d9f0ea9c24a7b6db3a7edc7124bb5bf3)).
 - *Fix*: calendar refresh issue after session deletion (see [this commit](https://github.com/Stefano-Bozzi/GymTracker-App/commit/b0a311c3e488ce3ec688fff123d17db7edbc82ef)).
 - *New Feature*: Implement dynamic progress state tracking (e1RM) [#7](https://github.com/Stefano-Bozzi/GymTracker-App/pull/7)
     - *New Feature*: Historical Data Auto-fill. The app now fetches your last performance for an exercise, pre-filling past repetitions and displaying the previously lifted weight as a grey placeholder (`hintText`).

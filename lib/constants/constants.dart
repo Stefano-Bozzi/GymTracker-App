@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';  // Import Flutter Material library for 
 
 // App Title and Version
 const String appName = "GymTracker";
-const String appVersion = "0.2.0";
+const String appVersion = "1.0.0";
 
 const double kgToLb = 2.20462;
 
